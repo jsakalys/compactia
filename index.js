@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Render Landing Page at Root
 app.get('/', function(req, res){
-	res.render('index');
+	res.render('index', { layout: 'layouts/landing' });
 });
 
 // Render Create Page upon Login

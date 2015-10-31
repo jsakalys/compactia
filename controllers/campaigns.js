@@ -8,7 +8,7 @@ router.get('/', function(req,res){
 });
 
 router.get('/new', function(req,res){
-	res.render('campaigns/new')
+	res.render('campaigns/new', { layout: 'layouts/new-campaign' })
 });
 
 router.get('/:id', function(req,res){
