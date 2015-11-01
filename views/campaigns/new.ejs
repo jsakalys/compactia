@@ -1,18 +1,6 @@
-New Campaign
-<!-- The following HTML is taken from Creative Tim's creation wizard -->
-<div class="image-container set-full-height" style="background-image: url('/img/wizard.jpg')">
-    <!--   Creative Tim Branding   -->
-    <a href="http://creative-tim.com">
-         <div class="logo-container">
-            <div class="logo">
-                <img src="/img/new_logo.png">
-            </div>
-            <div class="brand">
-                Creative Tim
-            </div>
-        </div>
-    </a>
-    
+<!-- The following HTML is taken from Creative Tim's creation wizard (tweaked by me) -->
+<div class="image-container set-full-height">
+
     <!--   Big container   -->
     <div class="container">
         <div class="row">
@@ -21,7 +9,7 @@ New Campaign
             <!--      Wizard container        -->   
             <div class="wizard-container"> 
                 
-                <div class="card wizard-card ct-wizard-orange" id="wizardProfile">
+                <div class="card wizard-card ct-wizard-blue" id="wizardProfile">
                     <form action="" method="">
                 <!--        You can switch "ct-wizard-orange"  with one of the next bright colors: "ct-wizard-blue", "ct-wizard-green", "ct-wizard-orange", "ct-wizard-red"             -->
                 
@@ -40,77 +28,76 @@ New Campaign
                         <div class="tab-content">
                             <div class="tab-pane" id="about">
                               <div class="row">
-                                  <h4 class="info-text">First, create a name, shortcut and password for your campaign.</h4>
-            
-                                    <div class="col-sm-6">
+                                  <h4 class="info-text">First, create a name, id and password for your campaign.</h4>
+                                  <div class="row">
+                                    <div class="col-sm-4 col-sm-offset-1 col-xs-10 col-xs-offset-1">
                                         <div class="form-group">
-                                            <label>Campaign name <small>(required)</small></label>
-                                            <input name="name" type="text" class="form-control" placeholder="ex. Cones of Dunshire">
+                                            <label>Campaign Name <small>(required)</small></label>
+                                            <input name="name" type="text" class="form-control" placeholder="ex. Cones of Dunshire" required="true">
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-5 col-xs-10 col-xs-offset-1">
                                         <div class="form-group">
-                                            <label>Shortcut <small>(required)</small></label>
-                                            <input name="name" type="text" class="form-control" placeholder="dunshire">
+                                            <label>Campaign ID <small>(required)</small></label>
+                                            <input name="identifier" type="text" class="form-control" placeholder="ex. Cones of Dunshire" required="true">
                                         </div>
                                     </div>
-                                  <div class="col-sm-4 col-sm-offset-1">
-                                     <div class="picture-container">
-                                          <div class="picture">
-                                              <img src="/img/default-avatar.png" class="picture-src" id="wizardPicturePreview" title=""/>
-                                              <input type="file" id="wizard-picture">
-                                          </div>
-                                          <h6>Choose Picture</h6>
-                                      </div>
                                   </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group">
-                                        <label>Password <small>(required)</small></label>
-                                        <input name="campaign-password" type="text" class="form-control" placeholder="Andrew...">
-                                      </div>
-                                      <div class="form-group">
-                                        <label>Re-enter password <small>(required)</small></label>
-                                        <input name="campaign-password2" type="text" class="form-control" placeholder="Smith...">
-                                      </div>
+                                  <div class="row">
+                                    <div class="col-sm-4 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                                       <div class="picture-container">
+                                            <div class="picture">
+                                                <img src="/img/default-avatar.png" class="picture-src" id="wizardPicturePreview" title=""/>
+                                                <input type="file" id="wizard-picture">
+                                            </div>
+                                            <h6>Campaign Insignia<br /><small>(optional)</small></h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5 col-xs-10 col-xs-offset-1">
+                                        <div class="form-group">
+                                          <label>Campaign Password <small>(required)</small></label>
+                                          <input name="campaign-password" type="password" class="form-control" placeholder="********" required="true">
+                                        </div>
+                                        <div class="form-group">
+                                          <label>Re-enter Password <small>(required)</small></label>
+                                          <input name="campaign-password2" type="password" class="form-control" placeholder="********" required="true">
+                                        </div>
+                                    </div>
                                   </div>
-                                 
                               </div>
                             </div>
                             <div class="tab-pane" id="account">
-                                <h4 class="info-text"> What are you doing? (checkboxes) </h4>
+                                <h4 class="info-text">Campaign Type</h4>
                                 <div class="row">
-                                   
-                                    
                                     <div class="col-sm-10 col-sm-offset-1">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">
                                             <div class="choice" data-toggle="wizard-checkbox">
-                                                <input type="checkbox" name="jobb" value="Design">
+                                                <input type="checkbox" name="type" value="physical">
                                                 <div class="icon">
                                                     <i class="fa fa-pencil"></i>
                                                 </div>
-                                                <h6>Design</h6>
+                                                <h6>Physical</h6>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">
                                             <div class="choice" data-toggle="wizard-checkbox">
-                                                <input type="checkbox" name="jobb" value="Code">
-                                                <div class="icon">
-                                                    <i class="fa fa-terminal"></i>
-                                                </div>
-                                                <h6>Code</h6>
-                                            </div>
-                                            
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="choice" data-toggle="wizard-checkbox">
-                                                <input type="checkbox" name="jobb" value="Develop">
+                                                <input type="checkbox" name="type" value="virtual">
                                                 <div class="icon">
                                                     <i class="fa fa-laptop"></i>
                                                 </div>
-                                                <h6>Develop</h6>
+                                                <h6>Virtual</h6>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-sm-4">
+                                            <div class="choice" data-toggle="wizard-checkbox">
+                                                <input type="checkbox" name="jobb" value="Develop">
+                                                <div class="icon">
+                                                    <i class="fa fa-terminal"></i>
+                                                </div>
+                                                <h6>Both</h6>
                                             </div>
                                             
-                                        </div>
+                                        </div> -->
                                     </div>
                                     
                                 </div>
@@ -118,28 +105,44 @@ New Campaign
                             <div class="tab-pane" id="address">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <h4 class="info-text"> Are you living in a nice area? </h4>
+                                        <h4 class="info-text">Campaign Location</h4>
                                     </div>
-                                    <div class="col-sm-7 col-sm-offset-1">
+                                    <div class="col-sm-10 col-sm-offset-1">
                                          <div class="form-group">
-                                            <labe>Street Name</label>
-                                            <input type="text" class="form-control" placeholder="5h Avenue">
+                                            <labe>Street</label>
+                                            <input type="text" class="form-control" placeholder="ex. 6 Merlin Circle">
                                           </div>
                                     </div>
-                                    <div class="col-sm-3">
+<!--                                <div class="col-sm-3">
                                          <div class="form-group">
                                             <label>Street Number</label>
                                             <input type="text" class="form-control" placeholder="242">
                                           </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-sm-5 col-sm-offset-1">
                                          <div class="form-group">
                                             <label>City</label>
-                                            <input type="text" class="form-control" placeholder="New York...">
+                                            <input type="text" class="form-control" placeholder="ex. Avalon">
                                           </div>
                                     </div>
                                     <div class="col-sm-5">
                                          <div class="form-group">
+                                            <label>State/Province</label><br>
+                                             <select name="country" class="form-control">
+                                                <option value="Afghanistan"> Alabama </option>
+                                                <option value="Albania"> Alaska </option>
+                                                <option value="Algeria"> Arizona </option>
+                                                <option value="American Samoa"> Arkansas </option>
+                                                <option value="Andorra"> California </option>
+                                                <option value="Angola"> Colorado </option>
+                                                <option value="Anguilla"> Connecticut </option>
+                                                <option value="Antarctica"> Delaware </option>
+                                                <option value="...">...</option>
+                                            </select>
+                                          </div>
+                                    </div>
+                                    <div class="col-sm-5 col-sm-offset-1">
+                                          <div class="form-group">
                                             <label>Country</label><br>
                                              <select name="country" class="form-control">
                                                 <option value="Afghanistan"> Afghanistan </option>
@@ -154,13 +157,19 @@ New Campaign
                                             </select>
                                           </div>
                                     </div>
+                                    <div class="col-sm-5">
+                                        <div class="form-group">
+                                            <label>Postal Code</label>
+                                            <input type="text" class="form-control" placeholder="01010">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="wizard-footer">
                             <div class="pull-right">
                                 <input type='button' class='btn btn-next btn-fill btn-warning btn-wd btn-sm' name='next' value='Next' />
-                                <input type='button' class='btn btn-finish btn-fill btn-warning btn-wd btn-sm' name='finish' value='Finish' />
+                                <input type='button' class='btn btn-finish btn-fill btn-warning btn-wd btn-sm' name='finish' value='CREATE' />
         
                             </div>
                             
@@ -175,12 +184,5 @@ New Campaign
         </div>
         </div><!-- end row -->
     </div> <!--  big container -->
-    
-    
-    <div class="footer">
-        <div class="container">
-             Made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>. Free download <a href="http://www.creative-tim.com/product/bootstrap-wizard">here.</a>
-        </div>
-    </div>
 
 </div>

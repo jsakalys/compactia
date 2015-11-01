@@ -412,6 +412,7 @@ h1 .subtitle{
 }
 
 label.error{
+    text-transform: none;
     color: #FF3B30;    
     margin-top: 5px;
     margin-bottom: 0;
@@ -683,7 +684,7 @@ label small{
 
 .card{
     background-color: #FFFFFF;
-    padding: 10px 0 20px;
+    padding: 0px 0px 0px;
     width: 100%;
 }
 
@@ -718,7 +719,7 @@ label{
 
 .wizard-container{
    
-    padding-top: 100px;
+    padding-top: 50px;
     z-index: 3;
 }
 .wizard-card{

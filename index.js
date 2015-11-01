@@ -1,33 +1,24 @@
-// Load Express
+// Loads Express
 var express = require('express');
 var app = express();
 
-// Load Ejs Layouts
+// Loads Ejs Layouts
 var ejsLayouts = require('express-ejs-layouts');
 app.set('view engine', 'ejs');
 app.use(ejsLayouts);
 
-// Use Static Directory
+// Uses Static Directory
 app.use(express.static(__dirname + '/static'));
 
-// Load Body Parser
+// Loads Body Parser
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Render Landing Page at Root
-app.get('/', function(req, res){
-	res.render('index', { layout: 'layouts/landing' });
-});
-
-// Render Create Page upon Login
-app.get('/create', function(req, res){
-	res.render('create');
-});
-
-// Use Controllers
+// Uses Controllers
+app.use("/", require("./controllers/root"));
 app.use("/campaigns", require("./controllers/campaigns"));
 app.use("/characters", require("./controllers/characters"));
 app.use("/notes", require("./controllers/notes"));
 
-// Listen on Port 3000
+// Listens on Port 3000
 app.listen(3000);
