@@ -7,24 +7,24 @@
                         <h4 class="title">New Character</h4>
                     </div>
                     <div class="content">
-                        <form>
+                         <form action="" method="POST">
                             <div class="row">
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <label>Name <small>(required)</small></label>
-                                        <input type="text" class="form-control" placeholder="Ex. Legolas" value="">
+                                        <input type="text" class="form-control" name="name" placeholder="Ex. Legolas">
                                     </div>        
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>Exp</label>
-                                        <input type="number" class="form-control" placeholder="0" value="">
+                                        <input type="number" class="form-control" name="exp" placeholder="0">
                                     </div>        
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Gold</label>
-                                        <input type="number" class="form-control" placeholder="0" value="">
+                                        <input type="number" class="form-control" name="gold" placeholder="0">
                                     </div>        
                                 </div>
                             </div>
@@ -32,19 +32,19 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>Race</label>
-                                        <input type="text" class="form-control" placeholder="ex. Elf" value="">
+                                        <input type="text" class="form-control" name="race" placeholder="ex. Elf">
                                     </div>        
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>Class</label>
-                                        <input type="text" class="form-control" placeholder="ex. Ranger" value="">
+                                        <input type="text" class="form-control" name="class" placeholder="ex. Ranger">
                                     </div>        
                                 </div>
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <label>Birthplace</label>
-                                        <input type="text" class="form-control" placeholder="ex. Mirkwood" value="">
+                                        <input type="text" class="form-control" name="birthplace" placeholder="ex. Mirkwood">
                                     </div>        
                                 </div>
                             </div>
@@ -52,12 +52,11 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Description</label>
-                                        <textarea rows="10" class="form-control" placeholder="A description of your character" value=""></textarea>
+                                        <textarea rows="10" class="form-control" name="desc" placeholder="A description of your character"></textarea>
                                     </div>        
                                 </div>
                             </div>
-
-                            <button type="submit" class="btn btn-info btn-fill pull-right">Create</button>
+                            <input type="submit" class="btn btn-info btn-fill pull-right" value="Create">
                             <div class="clearfix"></div>
                         </form>
                     </div>

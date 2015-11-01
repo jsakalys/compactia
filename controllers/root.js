@@ -2,6 +2,9 @@
 var express = require('express');
 var router = express();
 
+// Loads models
+var db = require("./../models");
+
 /* Routers */
 
 // Shows landing page at site root
@@ -9,12 +12,37 @@ router.get('/', function(req, res){
 	res.render('landing', { layout: 'layouts/landing-view' });
 });
 
+// Catches signup form input
+router.post('/signup', function(req, res){
+	db.user.findOrCreate({where: { name: req.body.name, email: req.body.email, password: req.body.password }}).spread(function(user, created) {
+	    if (created) {
+	    	res.render('create', {
+	    		layout: 'layouts/account-view',
+	    		user: user
+	    	});
+	    } else {
+	    	res.redirect('/')
+	    }
+  });
+});
+
+// Catches login form input
+router.post('/login', function(req, res){
+	// db.user.find({where: { email: req.body.email, password: req.body.password }}).then(function(user) {
+	//     if (user) {
+	//     	res.redirect('/create', {user: user});
+	//     } else {
+	//     	console.log('User not found.')
+	//     }
+ //  });
+});
+
 // Shows create page upon login if no characters or campaigns exist
 router.get('/create', function(req, res){
 	res.render('create', { layout: 'layouts/account-view' });
 });
 
-// Shows create page upon login if no characters or campaigns exist
+// Shows account information for a given user
 router.get('/user/:name', function(req, res){
 	res.render('account', { layout: 'layouts/account-view' });
 });

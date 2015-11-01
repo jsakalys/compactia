@@ -2,6 +2,9 @@
 var express = require('express');
 var app = express();
 
+// Loads models
+var db = require("./models");
+
 // Loads Ejs Layouts
 var ejsLayouts = require('express-ejs-layouts');
 app.set('view engine', 'ejs');
