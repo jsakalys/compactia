@@ -18,10 +18,10 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Uses Controllers
-app.use("/", require("./controllers/root"));
 app.use("/campaigns", require("./controllers/campaigns"));
 app.use("/characters", require("./controllers/characters"));
 app.use("/notes", require("./controllers/notes"));
+app.use("/", require("./controllers/root"));
 
 // Listens on Port 3000
 app.listen(3000);

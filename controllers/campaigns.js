@@ -36,8 +36,23 @@ router.post('/new', function(req,res){
 });
 
 // Shows a specific campaign with an option to edit it
-router.get('/:id', function(req,res){
+router.get('/:name', function(req,res){
 	res.render('campaigns/show', { layout: 'layouts/account-view' });
+});
+
+// Catches updated character info and updates to database
+router.post('/:name', function(req,res){
+	db.campaign.find({where: {id: req.body.id}}).then(function(campaign) {
+		campaign.updateAttributes({
+    		name: req.body.name,
+    		identifier: req.body.identifier,
+    		type: req.body.type,
+    		status: req.body.status,
+    		desc: req.body.desc
+  		}).then(function() {
+			res.render('characters/show', { layout: 'layouts/account-view' })
+  		});
+	});
 });
 
 // Exports router

@@ -20,7 +20,6 @@ router.get('/new', function(req,res){
 // Catches new character form data
 router.post('/new', function(req,res){
 	//remember to search for user, and then associate that user's new character to user
-
 	db.character.create({
 	    name: req.body.name,
 	    exp: parseInt(req.body.exp),
@@ -31,8 +30,21 @@ router.post('/new', function(req,res){
 });
 
 // Shows information about a given character with an option to edit it
-router.get('/:id', function(req,res){
+router.get('/:name', function(req,res){
 	res.render('characters/show', { layout: 'layouts/account-view' })
+});
+
+// Catches updated character info and updates to database
+router.post('/:name', function(req,res){
+	db.character.find({where: {id: req.body.id}}).then(function(character) {
+		character.updateAttributes({
+    		name: req.body.name,
+    		exp: parseInt(req.body.exp),
+    		gold: parseInt(req.body.gold)
+  		}).then(function() {
+			res.render('characters/show', { layout: 'layouts/account-view' })
+  		});
+	});
 });
 
 // Exports router

@@ -1,1 +1,115 @@
-Character Details
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-8">
+                <div id="characterInfo" class="card">
+                    <div class="header">
+                        <h4 class="title">Character Details
+                            <button class="btn btn-simple edit">
+                        		<small><i class="pe-7s-note"></i> Edit</small>
+                        	</button>
+                        </h4>
+                    </div>
+                    <div class="content">
+                         <form action="" method="POST">
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label>Name <small>(required)</small></label>
+                                        <input type="text" class="form-control" name="name" readonly>
+                                        <!-- Hidden ID to identify correct character in DB -->
+                                        <input type="hidden" class="form-control" name="id" value="2">
+                                    </div>        
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Exp</label>
+                                        <input type="number" class="form-control" name="exp" readonly>
+                                    </div>        
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label>Gold</label>
+                                        <input type="number" class="form-control" name="gold" readonly>
+                                    </div>        
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Race</label>
+                                        <input type="text" class="form-control" name="race" readonly>
+                                    </div>        
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Class</label>
+                                        <input type="text" class="form-control" name="class" readonly>
+                                    </div>        
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <label>Birthplace</label>
+                                        <input type="text" class="form-control" name="birthplace" readonly>
+                                    </div>        
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea rows="10" class="form-control" name="desc" readonly></textarea>
+                                    </div>        
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-info btn-fill pull-right hidden save saveChanges" value="Save Changes">
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card card-user">
+                    <div class="image">
+                        <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>   
+                    </div>
+                    <div class="content">
+                        <div class="author">
+                             <!--<a href="#">-->
+                            <img class="avatar border-gray" src="/img/faces/face-3.jpg" alt="..."/>
+                           
+                              <h4 class="title">Legolas<br />
+                                 <small>Elf Ranger</small>
+                              </h4> 
+                            <!--</a>-->
+                        </div>  
+                        <div class="text-center">
+                        	<button class="btn btn-simple">
+                        		<i class="pe-7s-way" style="margin-top:10px"></i>
+                        		<br />
+                        		<small>Mirkwood</small>
+                        	</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                    	<div class="col-xs-4 text-left">
+                        	<button class="btn btn-simple">
+                        		<i class="pe-7s-medal"></i> <label>2,763</label>
+                        	</button>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                        	<button class="btn btn-simple"><i class="pe-7s-more"></i>
+                        	</button>
+                        </div>
+                        <div class="col-xs-4 text-right">
+                        	<button class="btn btn-simple">
+                        		<i class="pe-7s-diamond"></i> <label>4,500</label>
+                        	</button>
+                        </div>
+                    </div>
+                </div>
+            </div>       
+        </div>                    
+    </div>
+</div>
