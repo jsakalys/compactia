@@ -196,4 +196,17 @@
             });
         });
     </script> -->
+    <!-- Custom JS -->
+    <script>
+    $(function(){
+        $(".edit").click(function(){
+            $('.saveChanges').toggleClass('hide');
+            $('input:text').removeAttr("readonly");    
+        });
+        $(".save").click(function(){
+            $('input:text').attr("readonly", "readonly");
+            $('.saveChanges').toggleClass('hide'); 
+        });               
+    });
+    </script>
 </html>
