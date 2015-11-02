@@ -26,6 +26,7 @@
     "express-session": "^1.12.1",
     "pg": "^4.4.3",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^3.13.0"
+    "sequelize": "^3.13.0",
+    "sequelize-isunique-validator": "^1.1.1"
   }
 }

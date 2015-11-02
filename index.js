@@ -2,6 +2,13 @@
 var express = require('express');
 var app = express();
 
+// Require isUnique validator
+// var Sequelize = require('sequelize');
+// require('sequelize-isunique-validator')(Sequelize);
+
+// Variable for currentUser
+var currentUser = 1
+
 // Loads models
 var db = require("./models");
 

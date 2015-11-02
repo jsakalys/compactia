@@ -4,37 +4,43 @@ module.exports = function(sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING,
       validate: {
-        isAlphanumeric: true
+        notEmpty: true
       }
     },
     identifier: {
       type: DataTypes.STRING,
+      isUnique: true,
       validate: {
-        isAlphanumeric: true
+        isAlphanumeric: true,
+        // sequelize.validateIsUnique('identifier')
       }
     },
     password: {
       type: DataTypes.STRING,
       validate: {
+        isAlphanumeric: true,
         min: 8
       }
     },
     type: {
       type: DataTypes.STRING,
-      defaultValue: 'Virtual'
     },
     status: {
       type: DataTypes.STRING,
-      defaultValue: 'Active'
     },
     desc: {
       type: DataTypes.TEXT,
-      defaultValue: ''
+    },
+    userId: {
+      type: DataTypes.INTEGER
     },
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        models.campaign.belongsTo(models.user);
+        models.campaign.hasMany(models.character);
+        models.campaign.hasMany(models.note);
       }
     }
   });
