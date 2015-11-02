@@ -35,14 +35,14 @@ router.get('/:name', function(req,res){
 });
 
 // Catches updated character info and updates to database
-router.post('/:name', function(req,res){
+router.put('/:name', function(req,res){
 	db.character.find({where: {id: req.body.id}}).then(function(character) {
 		character.updateAttributes({
     		name: req.body.name,
     		exp: parseInt(req.body.exp),
     		gold: parseInt(req.body.gold)
   		}).then(function() {
-			res.render('characters/show', { layout: 'layouts/account-view' })
+			//res.render('characters/show', { layout: 'layouts/account-view' })
   		});
 	});
 });

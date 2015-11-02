@@ -23,4 +23,18 @@ $(document).ready(function(){
     saveCard('#campaignInfo');
     editCard('#campaignLocation');
     saveCard('#campaignLocation');
+
+    $('.put-form').on('submit', function(e){
+        e.preventDefault();
+        var myUrl = $(this).attr('action');
+        var myData = $(this).serialize()
+        $.ajax({
+            method:'PUT',
+            url:myUrl,
+            data:myData
+        }).done(function(){
+            //do stuff when the put action is complete
+            //probably just redirect
+        });
+    });
 });

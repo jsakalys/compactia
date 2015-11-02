@@ -40,8 +40,8 @@ router.get('/:name', function(req,res){
 	res.render('campaigns/show', { layout: 'layouts/account-view' });
 });
 
-// Catches updated character info and updates to database
-router.post('/:name', function(req,res){
+// Catches updated campaign info and updates to database
+router.put('/:name', function(req,res){
 	db.campaign.find({where: {id: req.body.id}}).then(function(campaign) {
 		campaign.updateAttributes({
     		name: req.body.name,
@@ -50,7 +50,7 @@ router.post('/:name', function(req,res){
     		status: req.body.status,
     		desc: req.body.desc
   		}).then(function() {
-			res.render('characters/show', { layout: 'layouts/account-view' })
+ 			//res.render('campaigns/show', { layout: 'layouts/account-view' })
   		});
 	});
 });
