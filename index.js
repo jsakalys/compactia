@@ -54,8 +54,8 @@ app.use(ejsLayouts);
 // Uses Static Directory
 app.use(express.static(__dirname + '/static'));
 
-
 // Uses Controllers
+app.use("/campaign", require("./controllers/campaign"));
 app.use("/campaigns", require("./controllers/campaigns"));
 app.use("/characters", require("./controllers/characters"));
 app.use("/notes", require("./controllers/notes"));

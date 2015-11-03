@@ -23,6 +23,8 @@ $(document).ready(function(){
     saveCard('#campaignInfo');
     editCard('#campaignLocation');
     saveCard('#campaignLocation');
+    editCard('#accountInfo');
+    saveCard('#accountInfo');
 
     $('.put-form').on('submit', function(e){
         e.preventDefault();

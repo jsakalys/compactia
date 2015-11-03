@@ -1,0 +1,51 @@
+<div class="sidebar" data-color="green" data-image="/img/sidebar-5.jpg">    
+<!--   
+    Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" 
+    Tip 2: you can also add an image using data-image tag   
+-->
+	<div class="sidebar-wrapper">
+        <div class="logo">
+            <a href="<%= campaign.identifier %>" class="simple-text">
+                <%= campaign.name %>
+            </a>
+        </div>       
+        <ul class="nav">
+            <li>
+                <a href="dash/<%= campaign.identifier %>">
+                    <i class="pe-7s-notebook"></i> 
+                    <p>Main</p>
+                </a>            
+            </li>
+            <li>
+                <a href="activity/<%= campaign.identifier %>">
+                    <i class="pe-7s-bell"></i> 
+                    <p>Activity</p>
+                </a>        
+            </li>
+            <li>
+                <a href="notes/<%= campaign.identifier %>">
+                    <i class="pe-7s-note2"></i> 
+                    <p>Notes</p>
+                </a>        
+            </li>
+            <li>
+                <a href="characters/<%= campaign.identifier %>">
+                    <i class="pe-7s-users"></i> 
+                    <p>Characters</p>
+                </a>
+            </li> 
+            <li>
+                <a href="story/<%= campaign.identifier %>">
+                    <i class="pe-7s-news-paper"></i> 
+                    <p>Story</p>
+                </a>        
+            </li>
+            <li>
+                <a href="maps/<%= campaign.identifier %>">
+                    <i class="pe-7s-map-2"></i> 
+                    <p>Maps</p>
+                </a>        
+            </li>
+        </ul> 
+	</div>
+</div>
