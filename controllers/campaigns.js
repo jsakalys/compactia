@@ -78,11 +78,13 @@ router.post('/new', function(req,res){
 						});
 					} else {
 						console.log('Passwords do not match.');
-						req.flash('Passwords do not match.');
+						req.flash('Campaign passwords do not match.');
+						res.redirect('/');
 					}
 				} else {
 					console.log('A campaign with that identifier already exists.');
 					req.flash('Sorry, a campaign with that identifier already exists.');
+					res.redirect('/');
 				};
 			});
 		});

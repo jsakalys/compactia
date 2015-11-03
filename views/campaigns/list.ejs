@@ -1,7 +1,4 @@
 Campaign List
 <% campaigns.forEach(function(campaign){ %>
-	<%= campaign.name %> <br>
-	<%= campaign.identifier %> <br>
-	<%= campaign.status %> <br>
-	<%= campaign.desc %> <br>
+	<a href="/campaign/<%= campaign.identifier %>"><%= campaign.name %></a><br>
 <% }) %>

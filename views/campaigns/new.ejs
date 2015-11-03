@@ -1,8 +1,10 @@
 <!-- The following HTML is taken from Creative Tim's creation wizard (tweaked by me) -->
 <div class="content">
-
     <!--   Big container   -->
     <div class="container">
+        <div class="container">
+            <% include ../layouts/partials/alerts %>
+        </div>
         <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
            
@@ -29,7 +31,7 @@
                             <div class="tab-pane" id="about">
                               <div class="row">
                                   <h4 class="info-text">First, create a name, id and password for your campaign.</h4>
-                                  <div class="row">
+                                <div class="row">
                                     <div class="col-sm-4 col-sm-offset-1 col-xs-10 col-xs-offset-1">
                                         <div class="form-group">
                                             <label>Campaign Name <small>(required)</small></label>
@@ -42,8 +44,8 @@
                                             <input name="identifier" type="text" class="form-control" placeholder="ex. Cones of Dunshire" required>
                                         </div>
                                     </div>
-                                  </div>
-                                  <div class="row">
+                                </div>
+                                <div class="row">
                                     <div class="col-sm-4 col-sm-offset-1 col-xs-10 col-xs-offset-1">
                                        <div class="picture-container">
                                             <div class="picture">
@@ -63,8 +65,8 @@
                                           <input name="password2" type="password" class="form-control" placeholder="********" minlength="8" required>
                                         </div>
                                     </div>
-                                  </div>
-                              </div>
+                                </div>
+                            </div>
                             </div>
                             <div class="tab-pane" id="account">
                                 <h4 class="info-text">Campaign Type</h4>

@@ -1,4 +1,6 @@
 'use strict';
+var bcrypt = require("bcryptjs");
+
 module.exports = function(sequelize, DataTypes) {
   var campaign = sequelize.define('campaign', {
     name: {
@@ -41,6 +43,16 @@ module.exports = function(sequelize, DataTypes) {
         models.campaign.belongsTo(models.user);
         models.campaign.hasMany(models.character);
         models.campaign.hasMany(models.note);
+      }
+    },
+    hooks: {
+      beforeCreate: function(campaign, options, callback) {
+        if (!campaign.password) return callback(null, campaign);
+        bcrypt.hash(campaign.password, 10, function(err, hash) {
+          if (err) return callback(err);
+          campaign.password = hash;
+          callback(null, campaign);
+        });
       }
     }
   });

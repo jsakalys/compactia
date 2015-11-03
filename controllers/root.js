@@ -46,13 +46,21 @@ router.post('/login',function(req,res){
 	passport.authenticate('local', function(err, user, info) {
 		if (user) {
 	  		req.login(user, function(err) {
-				if (err) throw err;
-					req.flash('success', 'You are now logged in.');
-					res.redirect('/create');
-	  			});
+				if (err) {
+					console.log('FAIL '+err);
+					res.sendStatus('FAIL');
+				} else {
+					//req.flash('success', 'You are now logged in.');
+					//res.redirect('/create');
+					console.log('PASS');
+					res.sendStatus('PASS');
+				};
+  			});
 		} else {
-	  		req.flash('danger', 'Invalid ID/password combo.');
-	  		res.redirect('/'); // add AJAX thing here
+	  		//req.flash('danger', 'Invalid ID/password combo.');
+	  		//res.redirect('/'); // add AJAX thing here
+	  		console.log('FAIL no user');
+	  		res.sendStatus('FAIL');
 		};
 	})(req, res);
 });

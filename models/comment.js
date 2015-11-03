@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        models.note.belongsTo(models.campaign)
+        models.comment.belongsTo(models.note);
       }
     }
   });

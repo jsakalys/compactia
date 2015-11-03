@@ -26,6 +26,19 @@ $(document).ready(function(){
     editCard('#accountInfo');
     saveCard('#accountInfo');
 
+    $('.login-form').on('submit', function(e) {
+        e.preventDefault();
+        $.post( "/login", $(this).serialize(), function(data) {
+            if (data == 'PASS') {
+                console.log('passed');
+                window.location.replace("/create");            
+            } else {
+            /*   Simulate error message from the server   */
+                 shakeModal();
+            };
+        });
+    });
+
     $('.put-form').on('submit', function(e){
         e.preventDefault();
         var myUrl = $(this).attr('action');
@@ -39,4 +52,5 @@ $(document).ready(function(){
             //probably just redirect
         });
     });
+
 });
