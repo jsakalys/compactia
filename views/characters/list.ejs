@@ -1,9 +1,9 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-        <!-- start forEach loop here -->
+        <% characters.forEach(function(character){ %>
             <div class="col-sm-4">
-                <a href="/characters/show">
+                <a href="/characters/<%= character.name %>">
                     <div class="card card-user">
                         <div class="image">
                             <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>   
@@ -12,8 +12,8 @@
                             <div class="author">
                                  <!--<a href="#">-->
                                 <img class="avatar border-gray" src="/img/faces/face-3.jpg" alt="..."/>
-                                  <h4 class="title">Legolas<br />
-                                     <small>Elf Ranger</small>
+                                  <h4 class="title"><%= character.name %><br />
+                                     <small><%= character.class %></small>
                                   </h4>
                                 <!--</a>-->
                             </div>  
@@ -21,7 +21,7 @@
                             	<button class="btn btn-simple">
                             		<i class="pe-7s-way" style="margin-top:10px"></i>
                             		<br />
-                            		<small>Mirkwood</small>
+                            		<small><%= character.birthplace %></small>
                             	</button>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                         <div class="row">
                         	<div class="col-xs-4 text-left">
                             	<button class="btn btn-simple">
-                            		<i class="pe-7s-medal"></i> <label>2,763</label>
+                            		<i class="pe-7s-medal"></i> <label><%= character.exp %></label>
                             	</button>
                             </div>
                             <div class="col-xs-4 text-center">
@@ -38,13 +38,14 @@
                             </div>
                             <div class="col-xs-4 text-right">
                             	<button class="btn btn-simple">
-                            		<i class="pe-7s-diamond"></i> <label>4,500</label>
+                            		<i class="pe-7s-diamond"></i> <label><%= character.gold %></label>
                             	</button>
                             </div>
                         </div>
                     </div>
                 </a>
-            </div>       
+            </div> 
+        <% }) %>      
         </div>                    
     </div>
 </div>

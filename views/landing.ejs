@@ -19,7 +19,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Log in with</h4>
                     </div>
-                    <div class="modal-body"> 
+                    <div class="modal-body">
                         <div class="box">
                              <div class="content">
                                 <div class="social">
@@ -29,7 +29,7 @@
                                     <a id="google_login" class="circle google" href="/auth/google_oauth2">
                                         <i class="fa fa-google-plus fa-fw"></i>
                                     </a>
-                                    <a id="facebook_login" class="circle facebook" href="/auth/facebook">
+                                    <a id="facebook_login" class="circle facebook" href="/passport/facebook">
                                         <i class="fa fa-facebook fa-fw"></i>
                                     </a>
                                 </div>
@@ -40,10 +40,10 @@
                                 </div>
                                 <div class="error"></div>
                                 <div class="form loginBox">
-                                    <form method="post" action="/login" accept-charset="UTF-8">
+                                    <form method="POST" action="/login" accept-charset="UTF-8">
                                     <input id="email" class="form-control" type="text" placeholder="Email" name="email" required="true">
                                     <input id="password" class="form-control" type="password" placeholder="Password" name="password" required="true">
-                                    <input class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()">
+                                    <input class="btn btn-default btn-login" type="submit" value="Login"> <!-- later, add onlick="loginAjax()" -->
                                     </form>
                                 </div>
                              </div>
@@ -51,7 +51,7 @@
                         <div class="box">
                             <div class="content registerBox" style="display:none;">
                                  <div class="form">
-                                    <form method="post" html="{:multipart=>true}" data-remote="true" action="/signup" accept-charset="UTF-8">
+                                    <form method="POST" html="{:multipart=>true}" data-remote="true" action="/signup" accept-charset="UTF-8">
                                         <label for="name" class="hidden">Your Name</label>
                                             <input id="name" class="form-control" type="text" placeholder="Your name" name="name" required>
                                         <label for="email" class="hidden">Your Email</label>
@@ -59,7 +59,7 @@
                                         <label for="password" class="hidden">Enter a Password</label>
                                             <input id="password" class="form-control" type="password" placeholder="Enter a password" name="password" required>
                                         <label for="name" class="hidden">Re-enter Password</label>
-                                            <input id="password_confirmation" class="form-control" type="password" placeholder="Re-enter password" name="password_confirmation" required>
+                                            <input id="password2" class="form-control" type="password" placeholder="Re-enter password" name="password_confirmation" required>
                                         <input class="btn btn-default btn-register" type="submit" value="Create account" name="commit">
                                     </form>
                                 </div>

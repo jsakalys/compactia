@@ -9,7 +9,7 @@
                     <div class="row">
 	                    <div class="col-xs-6">
 	                        <button href="#" class="btn btn-simple" alt="share on Facebook">
-	                        	<i class="fa fa-facebook-square"></i> <label>Campaign Name</label>
+	                        	<i class="fa fa-facebook-square"></i> <label><%= campaign.name %></label>
 	                        </button> 
 	                    </div>
 	                    <div class="col-xs-6 text-right">
@@ -40,15 +40,15 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label>Name</label>
-                                        <input type="text" class="form-control" name="name" readonly>
+                                        <input type="text" class="form-control" name="name" value="<%= campaign.name %>" readonly>
                                         <!-- Hidden input to carry ID -->
-                                        <input type="hidden" class="form-control" name="id" value="3">
+                                        <input type="hidden" class="form-control" name="id" value="<%= campaign.id %>">
                                     </div>        
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>ID</label>
-                                        <input type="text" class="form-control" name="identifier" readonly>
+                                        <input type="text" class="form-control" name="identifier" value="<%= campaign.identifier %>" readonly>
                                     </div>        
                                 </div>
                             </div>
@@ -56,13 +56,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Type</label>
-                                        <input type="text" class="form-control" name="type" readonly>
+                                        <input type="text" class="form-control" name="type" value="<%= campaign.type %>" readonly>
                                     </div>        
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Status</label>
-                                        <input type="text" class="form-control" name="status" readonly>
+                                        <input type="text" class="form-control" name="status" value="<%= campaign.status %>" readonly>
                                     </div>        
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Description</label>
-                                        <textarea rows="5" class="form-control" name="desc" readonly></textarea>
+                                        <textarea rows="5" class="form-control" name="desc" value="<%= campaign.desc %>" readonly></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -93,15 +93,15 @@
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <label>Street</label>
-                                        <input type="text" class="form-control" name="street" readonly>
+                                        <input type="text" class="form-control" name="street" value="<%= location.street %>" readonly>
                                         <!-- Hidden input to carry ID -->
-                                        <input type="hidden" class="form-control" name="id" value="3">
+                                        <input type="hidden" class="form-control" name="id" value="<%= campaign.id %>">
                                     </div>        
                                 </div>
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <label>City</label>
-                                        <input type="text" class="form-control" name="city" readonly>
+                                        <input type="text" class="form-control" name="city" value="<%= location.city %>" readonly>
                                     </div>        
                                 </div>
                             </div>
@@ -109,19 +109,19 @@
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <label>State</label>
-                                        <input type="text" class="form-control" name="state" readonly>
+                                        <input type="text" class="form-control" name="state" value="<%= location.state %>" readonly>
                                     </div>        
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>Country</label>
-                                        <input type="text" class="form-control" name="country" readonly>
+                                        <input type="text" class="form-control" name="country" value="<%= location.country %>" readonly>
                                     </div>        
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>Postal Code</label>
-                                        <input type="text" class="form-control" name="zip" readonly>
+                                        <input type="text" class="form-control" name="zip" value="<%= location.zip %>" readonly>
                                     </div>        
                                 </div>
                             </div>
