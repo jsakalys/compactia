@@ -32,6 +32,7 @@ module.exports = function(sequelize, DataTypes) {
         models.user.belongsToMany(models.campaign, {through: "usersCampaigns"});
         models.user.hasMany(models.character);
         models.user.hasMany(models.provider);
+        models.user.hasMany(models.note);
       },
       authenticate: function(email, password, callback) {
         this.find({where: {email: email}}).then(function(user) {

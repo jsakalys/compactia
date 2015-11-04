@@ -1,76 +1,84 @@
 <div class="content">
     <div class="container-fluid">    
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-sm-8">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Email Statistics</h4>
-                        <p class="category">Last Campaign Performance</p>
+                        <h4 class="title"><%= campaign.name %></h4>
+                        <p class="category">
+                        Owned by <%= campaign.ownerId %>
+                        </p>
                     </div>
-                    <div class="content">                                
-                        <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
-                        
+                    <div class="content">
+                    <% if (campaign.desc) { %>
+                        <blockquote>                            
+                            <p><%= campaign.desc %></p>
+                        </blockquote>
+                    <% }; %>
                         <div class="footer">
-                            <div class="legend">
-                                <i class="fa fa-circle text-info"></i> Open
-                                <i class="fa fa-circle text-danger"></i> Bounce
-                                <i class="fa fa-circle text-warning"></i> Unsubscribe
-                            </div>
                             <hr>
                             <div class="stats">
-                                <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
+                                <i class="fa fa-history"></i>
+                                Updated <%= campaign.updatedAt %>
                             </div>                                    
                         </div>
                     </div>
                 </div>
-            </div>
-                    
-            <div class="col-md-8">
+            </div>          
+            <div class="col-sm-4">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Users Behavior</h4>
-                        <p class="category">24 Hours performance</p>
+                        <h4 class="title">Campaign Members</h4>
+                        <p class="category">Total: <%= users.length %></p>
                     </div>
                     <div class="content">
-                        <div id="chartHours" class="ct-chart"></div>
-                        <div class="footer">
-                            <div class="legend">
-                                <i class="fa fa-circle text-info"></i> Open
-                                <i class="fa fa-circle text-danger"></i> Click
-                                <i class="fa fa-circle text-warning"></i> Click Second Time
-                            </div>
-                            <hr>
-                            <div class="stats">
-                                <i class="fa fa-history"></i> Updated 3 minutes ago
-                            </div>
+                        <div>
+                        <% users.forEach(function(user){ %>
+                            <h6><%= user.name %></h6>
+                        <% }) %>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <div class="card ">
+        <% if (notes[0]) { %>
+            <div class="col-sm-8">
+                <div class="card">
                     <div class="header">
-                        <h4 class="title">2014 Sales</h4>
-                        <p class="category">All products including Taxes</p>
+                        <h4 class="title"><%= notes[0].title %></h4>
+                        <p class="category">New Note</p>
                     </div>
                     <div class="content">
-                        <div id="chartActivity" class="ct-chart"></div>
+                        <div>
+                            <p><%= notes[0].body %></p>
+                        </div>
                         <div class="footer">
-                            <div class="legend">
-                                <i class="fa fa-circle text-info"></i> Tesla Model S
-                                <i class="fa fa-circle text-danger"></i> BMW 5 Series
-                            </div>
                             <hr>
                             <div class="stats">
-                                <i class="fa fa-check"></i> Data information certified
+                                <i class="fa fa-clock-o"></i> 
+                                Created <%= notes[0].createdAt %>
                             </div>                                 
                         </div>
                     </div>
                 </div>
             </div>
-			<div class="col-md-6">
+        <% } else { %>
+            <div class="col-sm-8">
+            </div>
+        <% }; %>
+			<div class="col-sm-4">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Recent Activity</h4>
+                        <p class="category"></p>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
 			</div>
 		</div>
 	</div>

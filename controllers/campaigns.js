@@ -25,10 +25,8 @@ router.get('/all', function(req,res){
 router.get('/list', function(req,res){
 	// look up current user in database, find all campaigns for that user and pass them in
 	if (req.user) {
-		console.log('user: ' + req.user.id);
 		db.campaign.findAll({where: {ownerId: req.user.id}}).then(function(campaigns){
 			if (campaigns) {
-				console.log(campaigns);
 				res.render('campaigns/list', {
 					layout: 'layouts/account-view',
 					campaigns: campaigns
@@ -116,7 +114,7 @@ router.get('/:identifier', function(req,res){
 router.put('/:identifier', function(req,res){
 	// only allow write priviliges if owner is current user
 	if (req.user) {
-		db.campaign.find({where: {identifier: req.body.id}}).then(function(campaign) {
+		db.campaign.find({where: {id: req.body.id}}).then(function(campaign) {
 			if (campaign.ownerId == req.user.id) {
 				campaign.updateAttributes({
 		    		name: req.body.name,

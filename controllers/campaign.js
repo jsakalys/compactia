@@ -16,9 +16,13 @@ router.get('/:identifier', function(req, res){
 			campaign.getUsers().then(function(users){
 				users.forEach(function(user){
 					if (user.id == req.user.id) {
-						res.render('campaign/main', {
-							layout: 'layouts/campaign-view',
-							campaign: campaign
+						campaign.getNotes({order: [['createdAt', 'DESC']]}).then(function(notes){
+							res.render('campaign/main', {
+								layout: 'layouts/campaign-view',
+								campaign: campaign,
+								users: users,
+								notes: notes
+							});
 						});
 					};
 				});
