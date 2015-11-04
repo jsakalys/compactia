@@ -62,4 +62,4 @@ app.use("/notes", require("./controllers/notes"));
 app.use("/", require("./controllers/root"));
 
 // Listens on Port 3000
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
