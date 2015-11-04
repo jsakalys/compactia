@@ -25,6 +25,8 @@ $(document).ready(function(){
     saveCard('#campaignLocation');
     editCard('#accountInfo');
     saveCard('#accountInfo');
+    editCard('#noteInfo');
+    saveCard('#noteInfo');
 
     $('.login-form').on('submit', function(e) {
         e.preventDefault();

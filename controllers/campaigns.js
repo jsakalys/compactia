@@ -25,17 +25,17 @@ router.get('/all', function(req,res){
 router.get('/list', function(req,res){
 	// look up current user in database, find all campaigns for that user and pass them in
 	if (req.user) {
-		db.user.findOne({where: {id: req.user.id}}).then(function(user){
-			user.getCampaigns().then(function(campaigns){
-				if (campaigns) {
-					res.render('campaigns/list', {
-						layout: 'layouts/account-view',
-						campaigns: campaigns
-					});
-				} else {
-					res.redirect('/campaigns/new');
-				};
-			});
+		console.log('user: ' + req.user.id);
+		db.campaign.findAll({where: {ownerId: req.user.id}}).then(function(campaigns){
+			if (campaigns) {
+				console.log(campaigns);
+				res.render('campaigns/list', {
+					layout: 'layouts/account-view',
+					campaigns: campaigns
+				});
+			} else {
+				res.redirect('/campaigns/new');
+			};
 		});
 	} else {
 		res.send('Access denied: you are not logged in.')
@@ -55,38 +55,39 @@ router.get('/new', function(req,res){
 // Catches campaign wizard form data and creates new database record
 router.post('/new', function(req,res){
 	if (req.user) {
-		db.user.findOne({where: {id: req.user.id}}).then(function(user){
-			db.campaign.findOne({where: {identifier: req.body.identifier}}).then(function(campaign){
-				if (!campaign) {
-					if (req.body.password == req.body.password2) {
-						user.createCampaign({
-							name: req.body.name,
-							identifier: req.body.identifier,
-							password: req.body.password,
-							type: req.body.type
-						}).then(function(campaign) {
-					    	db.location.create({
-					  			street: req.body.street,
-					  			city: req.body.city,
-					  			state: req.body.state,
-					  			country: req.body.country,
-					  			zip: req.body.zip,
-					  			campaignId: campaign.id
-					  		}).then(function() {
-						    	res.redirect('list');			
-					  		});
-						});
-					} else {
-						console.log('Passwords do not match.');
-						req.flash('Campaign passwords do not match.');
-						res.redirect('/');
-					}
+		db.campaign.findOne({where: {identifier: req.body.identifier}}).then(function(campaign){
+			if (!campaign) {
+				if (req.body.password == req.body.password2) {
+					db.campaign.create({
+						ownerId: req.user.id,
+						name: req.body.name,
+						identifier: req.body.identifier,
+						password: req.body.password,
+						type: req.body.type
+					}).then(function(campaign) {
+				    	db.location.create({
+				  			street: req.body.street,
+				  			city: req.body.city,
+				  			state: req.body.state,
+				  			country: req.body.country,
+				  			zip: req.body.zip,
+				  			campaignId: campaign.id
+				  		}).then(function() {
+				  			campaign.addUser(req.user.id).then(function(){
+				  				res.redirect('list');	
+				  			});	
+				  		});
+					});
 				} else {
-					console.log('A campaign with that identifier already exists.');
-					req.flash('Sorry, a campaign with that identifier already exists.');
+					console.log('Passwords do not match.');
+					req.flash('Campaign passwords do not match.');
 					res.redirect('/');
 				};
-			});
+			} else {
+				console.log('A campaign with that identifier already exists.');
+				req.flash('Sorry, a campaign with that identifier already exists.');
+				res.redirect('/');
+			};
 		});
 	} else {
 		res.send('Access denied: you are not logged in.')
@@ -104,7 +105,7 @@ router.get('/:identifier', function(req,res){
 					campaign: campaign,
 					location: location
 				});
-			});	
+			});
 		});
 	} else {
 		res.send('Access denied: you are not logged in.');
@@ -113,29 +114,34 @@ router.get('/:identifier', function(req,res){
 
 // Catches updated campaign info and updates to database
 router.put('/:identifier', function(req,res){
-	// only allow access priviliges if associated user is current user
+	// only allow write priviliges if owner is current user
 	if (req.user) {
-		db.campaign.find({where: {id: req.body.id}}).then(function(campaign) {
-			campaign.updateAttributes({
-	    		name: req.body.name,
-	    		identifier: req.body.identifier,
-	    		type: req.body.type,
-	    		status: req.body.status,
-	    		desc: req.body.desc
-	  		}).then(function(campaign) {
-	  			// separate this into two routes eventually
-				db.location.find({where: {campaignId: req.body.id}}).then(function(location) {
-					location.updateAttributes({
-			    		street: req.body.street,
-			    		city: req.body.city,
-			    		state: req.body.state,
-			    		country: req.body.country,
-			    		zip: req.body.zip
-			  		}).then(function() {
-			  			// don't need anything here, cause ajax
-			  		});
-				});
-	  		});
+		db.campaign.find({where: {identifier: req.body.id}}).then(function(campaign) {
+			if (campaign.ownerId == req.user.id) {
+				campaign.updateAttributes({
+		    		name: req.body.name,
+		    		identifier: req.body.identifier,
+		    		type: req.body.type,
+		    		status: req.body.status,
+		    		desc: req.body.desc
+		  		}).then(function(campaign) {
+		  			// separate this into two routes eventually
+					db.location.find({where: {campaignId: req.body.id}}).then(function(location) {
+						location.updateAttributes({
+				    		street: req.body.street,
+				    		city: req.body.city,
+				    		state: req.body.state,
+				    		country: req.body.country,
+				    		zip: req.body.zip
+				  		}).then(function() {
+				  			// don't need anything here, cause ajax
+				  		});
+					});
+		  		});
+		  	} else {
+		  		res.send('Access denied: you are not the owner of this campaign.')
+		  		return false;
+		  	};
 		});
 	} else {
 		res.send('Access denied: you are not logged in.');

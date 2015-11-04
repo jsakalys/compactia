@@ -16,7 +16,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Title <small>(required)</small></label>
-                                        <input type="text" class="form-control" name="name" value="<%= note.name %>" readonly>
+                                        <input type="text" class="form-control" name="title" value="<%= note.title %>" readonly>
                                         <!-- Hidden ID to identify correct character in DB -->
                                         <input type="hidden" class="form-control" name="id" value="<%= note.id %>">
                                     </div>        
@@ -25,8 +25,8 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label>Description</label>
-                                        <textarea rows="15" class="form-control" name="desc" value="" readonly></textarea>
+                                        <label>Body</label>
+                                        <textarea rows="15" class="form-control" name="body" readonly><%= note.body %></textarea>
                                     </div>        
                                 </div>
                             </div>

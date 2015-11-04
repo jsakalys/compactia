@@ -5,9 +5,11 @@
                 <div id="characterInfo" class="card">
                     <div class="header">
                         <h4 class="title">Character Details
+                        <% if (character.userId == currentUser.id) { %>
                             <button class="btn btn-simple edit">
                         		<small><i class="pe-7s-note"></i> Edit</small>
                         	</button>
+                        <% }; %>
                         </h4>
                     </div>
                     <div class="content">

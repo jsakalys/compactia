@@ -24,7 +24,7 @@
                         	<% notes.forEach(function(note){ %>
                             	<tr>
                                 	<td>
-                                		<a href="/notes/<%= note.title %>/<% campaign.identifier%>">
+                                		<a href="/notes/<%= note.title %>/<%= campaign.identifier %>">
                                 			<%= note.title.substr(0, 24) %>
                                 		</a>
                                 	</td>

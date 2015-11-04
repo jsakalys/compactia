@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        models.user.hasMany(models.campaign);
+        models.user.belongsToMany(models.campaign, {through: "usersCampaigns"});
         models.user.hasMany(models.character);
         models.user.hasMany(models.provider);
       },

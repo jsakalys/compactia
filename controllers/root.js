@@ -29,9 +29,8 @@ router.post('/signup', function(req, res){
 			password: req.body.password 
 		}}).spread(function(user, created) {
 			if (created) {
-				res.render('create', {
-					layout: 'layouts/account-view',
-					user: user
+				req.login(user, function(err){
+					res.redirect('/create');
 				});
 			} else {
 				req.flash('danger', 'A user with that e-mail address already exists.');

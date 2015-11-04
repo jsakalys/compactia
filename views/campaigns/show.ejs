@@ -29,9 +29,11 @@
                 <div id="campaignInfo" class="card">
                     <div class="header">
                         <h4 class="title">Campaign Details 
+                        <% if (campaign.ownerId == currentUser.id) { %>
                         	<button class="btn btn-simple edit">
                         		<small><i class="pe-7s-note"></i> Edit</small>
                         	</button>
+                        <% }; %>
                         </h4>
                     </div>
                     <div class="content">

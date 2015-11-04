@@ -33,14 +33,14 @@ module.exports = function(sequelize, DataTypes) {
     desc: {
       type: DataTypes.TEXT,
     },
-    userId: {
+    ownerId: {
       type: DataTypes.INTEGER
-    },
+    }
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        models.campaign.belongsTo(models.user);
+        models.campaign.belongsToMany(models.user, {through: "usersCampaigns"});
         models.campaign.hasMany(models.character);
         models.campaign.hasMany(models.note);
       }

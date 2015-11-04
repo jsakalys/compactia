@@ -1,18 +1,25 @@
 <!-- The following HTML is taken from Creative Tim's login and register modal (edited by me) -->
 <div class="container">
-        <div class="row">
-            <div class="col-sm-4">
-                <h1>Compactia</h1>
-            </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h1>Compactia</h1>
         </div>
-        <div class="row">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                 <a class="btn big-login" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Log in</a>
-                 <a class="btn big-register" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a></div>
-            <div class="col-sm-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <% if (!currentUser) { %>
+             <a class="btn big-login" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Log In</a>
+            
+             <a class="btn big-register" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a>
+             <% }; %>
+             <% if (currentUser) { %>
+             <a class="btn big-login" data-toggle="modal" href="/logout">Log Out</a>
+             <% }; %>
         </div>
-		 <div class="modal fade login" id="loginModal">
+        <div class="col-sm-4"></div>
+    </div>
+		<div class="modal fade login" id="loginModal">
 		      <div class="modal-dialog login animated">
     		      <div class="modal-content">
     		         <div class="modal-header">

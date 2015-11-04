@@ -9,17 +9,20 @@ var db = require("./../models");
 
 // Shows overview page for a given campaign
 router.get('/:identifier', function(req, res){
-	// only show if campaign is owned by user or if a user's character belongs to the campaign
+	// only show if user is logged in
 	if (req.user) {
 		db.campaign.findOne({where: {identifier: req.params.identifier}}).then(function(campaign){
-			if (campaign.userId == req.user.id) {
-				res.render('campaign/main', {
-					layout: 'layouts/campaign-view',
-					campaign: campaign
+			// only show if current user is associated with campaign
+			campaign.getUsers().then(function(users){
+				users.forEach(function(user){
+					if (user.id == req.user.id) {
+						res.render('campaign/main', {
+							layout: 'layouts/campaign-view',
+							campaign: campaign
+						});
+					};
 				});
-			} else {
-				return false;
-			};
+			});
 		});
 	} else {
 		res.send('Access denied: you are not logged in.');
@@ -28,20 +31,22 @@ router.get('/:identifier', function(req, res){
 
 // Shows campaign-specific characters for a given campaign
 router.get('/characters/:identifier', function(req, res){
-	// only show if campaign is owned by user or if a user's character belongs to the campaign
+	// only show if user is logged in
 	if (req.user) {
 		db.campaign.findOne({where: {identifier: req.params.identifier}}).then(function(campaign){
-			campaign.getCharacters().then(function(characters){
-				if (campaign.userId == req.user.id) {
-					// look up campaign in database, and pass in all associated characters
-					res.render('characters/list', {
-						layout: 'layouts/campaign-view',
-						campaign: campaign,
-						characters: characters
-					});
-				} else {
-					return false;
-				};
+			// only show if current user is associated with campaign
+			campaign.getUsers().then(function(users){
+				users.forEach(function(user){
+					if (user.id == req.user.id) {
+						campaign.getCharacters().then(function(characters){
+							res.render('characters/list', {
+								layout: 'layouts/campaign-view',
+								campaign: campaign,
+								characters: characters
+							});
+						});
+					};
+				});
 			});
 		});
 	} else {
@@ -51,18 +56,22 @@ router.get('/characters/:identifier', function(req, res){
 
 // Shows campaign-specific notes for a given campaign
 router.get('/notes/:identifier', function(req, res){
+	// only show if user is logged in
 	if (req.user) {
 		db.campaign.findOne({where: {identifier: req.params.identifier}}).then(function(campaign){
-			campaign.getNotes().then(function(notes){
-				if (campaign.userId == req.user.id) {
-					res.render('notes/list', {
-						layout: 'layouts/campaign-view',
-						campaign: campaign,
-						notes: notes
-					});		
-				} else {
-					return false;
-				};
+			// only show if current user is associated with campaign
+			campaign.getUsers().then(function(users){
+				users.forEach(function(user){
+					if (user.id == req.user.id) {
+						campaign.getNotes().then(function(notes){
+							res.render('notes/list', {
+								layout: 'layouts/campaign-view',
+								campaign: campaign,
+								notes: notes
+							});
+						});
+					};
+				});
 			});
 		});
 	} else {
