@@ -66,9 +66,12 @@ router.get('/:name', function(req,res){
 			userId: req.user.id,
 			name: req.params.name
 		}}).then(function(character){
-			res.render('characters/show', {
-				layout: 'layouts/account-view',
-				character: character
+			character.getCampaign().then(function(campaign){
+				res.render('characters/show', {
+					layout: 'layouts/account-view',
+					character: character,
+					campaign: campaign
+				});	
 			});
 		});
 	} else {

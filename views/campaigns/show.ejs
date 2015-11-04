@@ -85,7 +85,9 @@
                     <div class="header">
                         <h4 class="title">Campaign Location 
                         	<button class="btn btn-simple edit">
+                            <% if (campaign.ownerId == currentUser.id) { %>
                         		<small><i class="pe-7s-note"></i> Edit</small>
+                            <% }; %>
                         	</button>
                         </h4>
                     </div>

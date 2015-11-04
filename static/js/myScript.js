@@ -50,8 +50,9 @@ $(document).ready(function(){
             url:myUrl,
             data:myData
         }).done(function(){
-            //do stuff when the put action is complete
-            //probably just redirect
+            if ($(this).attr('id', 'addCharacter') || $(this).attr('id', 'removeCharacter')) {
+                window.location.replace("");
+            }
         });
     });
 

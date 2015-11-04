@@ -83,5 +83,83 @@ router.get('/notes/:identifier', function(req, res){
 	};
 });
 
+// Shows a page that lets a user join the campaign
+router.get('/join/:identifier', function(req,res){
+	// only show if user is logged in
+	if (req.user) {
+		db.campaign.findOne({where: {identifier: req.params.identifier}}).then(function(campaign){
+			campaign.getUsers().then(function(users){
+				users.forEach(function(user){
+					// show campaign home if user is already in that campaign
+					if (user.id == req.user.id) {
+						res.redirect('/campaign/' + campaign.identifier);
+					} else {
+						res.render('campaign/join', {
+							layout: 'layouts/account-view',
+							campaign: campaign
+						});
+					};
+				});
+			});
+		});
+	} else {
+		res.send('Access denied: you are not logged in.')
+	};
+});
+
+// Catches join campaign form data and adds user to campaign
+router.post('/join/:identifier', function(req,res){
+	// only show if user is logged in
+	if (req.user) {
+		// Search for campaign and add user to it if password matches
+		db.campaign.findOne({where: {identifier: req.params.identifier}}).then(function(campaign){
+			if (campaign.password == req.body.password) {
+				db.user.findOne({where: {id: req.user.id}}).then(function(user){
+					campaign.addUser(user).then(function(){
+						res.redirect('/campaign/' + campaign.identifier);
+					});
+				});	
+			} else {
+				console.log('Incorrect password.');
+				res.redirect('/campaign/join/' + campaign.identifier);
+			};
+		});
+	};
+});
+
+// Adds a character to the campaign
+router.put('/character/add', function(req,res){
+	// only allow access priviliges if user is logged in
+	if (req.user) {
+		// find campaign and associate character with it
+			db.campaign.find({where: {identifier: req.body.identifier,}}).then(function(campaign){
+				db.character.find({where: {id: parseInt(req.body.characterId)}}).then(function(character) {
+					campaign.addCharacter(character).then(function() {
+		  				res.send('character added.');
+		  			});
+				});
+			});
+	} else {
+		res.send('Access denied: you are not logged in.');
+	};
+});
+
+// Removes a character from a campaign
+router.put('/character/remove', function(req,res){
+	// only allow access priviliges if user is logged in
+	if (req.user) {
+		// find campaign and associate character with it
+			db.campaign.find({where: {identifier: req.body.identifier,}}).then(function(campaign){
+				db.character.find({where: {id: parseInt(req.body.characterId)}}).then(function(character) {
+					campaign.removeCharacter(character).then(function() {
+		  				res.send('character removed.')
+		  			});
+				});
+			});
+	} else {
+		res.send('Access denied: you are not logged in.');
+	};
+});
+
 // Exports router
 module.exports = router;

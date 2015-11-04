@@ -20,7 +20,8 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
     },
     campaignId: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull: true
     },
   }, {
     classMethods: {
