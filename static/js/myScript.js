@@ -2,6 +2,7 @@ var editCard = function(cardId) {
     $(cardId + ' .edit').on('click', function(e){
     e.preventDefault();
     $(cardId + ' input, textarea').prop('readonly', false);
+    $(cardId + ' select').attr('disabled', false);
     $(cardId + ' .edit').toggleClass('hidden');
     $(cardId + ' .saveChanges').toggleClass('hidden');   
     });          
@@ -11,6 +12,7 @@ var saveCard = function(cardId) {
     $(cardId + ' .save').on('click', function(e){
     //e.preventDefault();
     $(cardId + ' input, textarea').prop('readonly', true);
+    $(cardId + ' select').attr('disabled', true);
     $(cardId + ' .edit').toggleClass('hidden');
     $(cardId + ' .saveChanges').toggleClass('hidden');
     }); 
@@ -27,6 +29,8 @@ $(document).ready(function(){
     saveCard('#accountInfo');
     editCard('#noteInfo');
     saveCard('#noteInfo');
+
+    $('.user-pic').tooltip();
 
     $('.login-form').on('submit', function(e) {
         e.preventDefault();

@@ -6,7 +6,7 @@
                     <div class="header">
                         <h4 class="title"><%= campaign.name %></h4>
                         <p class="category">
-                        Owned by <%= campaign.ownerId %>
+                        Summary
                         </p>
                     </div>
                     <div class="content">
@@ -34,7 +34,7 @@
                     <div class="content">
                         <div>
                         <% users.forEach(function(user){ %>
-                            <h6><%= user.name %></h6>
+                        <img src="<%= userImages[user.id] %>" width="50" height="50" class="user-pic img-circle" data-toggle="tooltip" title="<%= user.name %>">
                         <% }) %>
                         </div>
                     </div>

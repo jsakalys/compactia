@@ -5,6 +5,9 @@ var router = express.Router();
 // Loads models
 var db = require("./../models");
 
+// Require cloudinary
+var cloudinary = require('cloudinary');
+
 /* Routers */
 
 // Shows overview page for a given campaign
@@ -14,14 +17,17 @@ router.get('/:identifier', function(req, res){
 		db.campaign.findOne({where: {identifier: req.params.identifier}}).then(function(campaign){
 			// only show if current user is associated with campaign
 			campaign.getUsers().then(function(users){
+				var userImages = {}
 				users.forEach(function(user){
+					userImages[user.id] = cloudinary.url(user.pic, {width: 100, height: 100, crop: "fill", gravity: "face"});
 					if (user.id == req.user.id) {
 						campaign.getNotes({order: [['createdAt', 'DESC']]}).then(function(notes){
 							res.render('campaign/main', {
 								layout: 'layouts/campaign-view',
 								campaign: campaign,
 								users: users,
-								notes: notes
+								notes: notes,
+								userImages: userImages
 							});
 						});
 					};

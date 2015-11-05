@@ -119,7 +119,7 @@ router.get('/create', function(req, res){
 router.get('/account', function(req, res){
 	// only show if user logged in, else redirect to signup page
 	if (req.user) {
-		var userPic = cloudinary.url(req.user.pic, { width: 150, height: 150, crop: 'crop', gravity: 'face',radius: 'max' });
+		var userPic = cloudinary.url(req.user.pic, { width: 125, height: 125, crop: 'crop', gravity: 'face' });
 		res.render('account', {
 			layout: 'layouts/account-view',
 			userPic: userPic

@@ -44,7 +44,8 @@
                                         <label>Name</label>
                                         <input type="text" class="form-control" name="name" value="<%= campaign.name %>" readonly>
                                         <!-- Hidden input to carry ID -->
-                                        <input type="hidden" class="form-control" name="id" value="<%= campaign.id %>">
+                                        <input type="text" class="form-control hidden" name="campaignId" value="<%= campaign.id %>">
+                                        <input type="text" class="form-control hidden" name="ownerId" value="<%= campaign.ownerId %>">
                                     </div>        
                                 </div>
                                 <div class="col-sm-4">
@@ -64,7 +65,12 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Status</label>
-                                        <input type="text" class="form-control" name="status" value="<%= campaign.status %>" readonly>
+                                        <select class="form-control" name="status" disabled>
+                                            <option>Active</option>
+                                            <option>Inactive</option>
+                                            <option>On Hiatus</option>
+                                            <option>Retired</option>
+                                        </select>
                                     </div>        
                                 </div>
                             </div>
@@ -81,7 +87,7 @@
                         </form>
                     </div>
                 </div>
-                 <div id="campaignLocation" class="card">
+                <div id="campaignLocation" class="card">
                     <div class="header">
                         <h4 class="title">Campaign Location 
                         	<button class="btn btn-simple edit">
@@ -99,7 +105,7 @@
                                         <label>Street</label>
                                         <input type="text" class="form-control" name="street" value="<%= location.street %>" readonly>
                                         <!-- Hidden input to carry ID -->
-                                        <input type="hidden" class="form-control" name="id" value="<%= campaign.id %>">
+                                        <input type="text" class="form-control hidden" name="campaignId" value="<%= campaign.id %>">
                                     </div>        
                                 </div>
                                 <div class="col-sm-5">

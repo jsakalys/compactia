@@ -61,7 +61,8 @@ router.post('/new', function(req,res){
 						name: req.body.name,
 						identifier: req.body.identifier,
 						password: req.body.password,
-						type: req.body.type
+						type: req.body.type,
+						status: 'Active'
 					}).then(function(campaign) {
 				    	db.location.create({
 				  			street: req.body.street,
@@ -114,17 +115,16 @@ router.get('/:identifier', function(req,res){
 router.put('/:identifier', function(req,res){
 	// only allow write priviliges if owner is current user
 	if (req.user) {
-		db.campaign.find({where: {id: req.body.id}}).then(function(campaign) {
+		db.campaign.find({where: {identifier: req.params.identifier}}).then(function(campaign) {
 			if (campaign.ownerId == req.user.id) {
 				campaign.updateAttributes({
 		    		name: req.body.name,
 		    		identifier: req.body.identifier,
 		    		type: req.body.type,
-		    		status: req.body.status,
 		    		desc: req.body.desc
 		  		}).then(function(campaign) {
 		  			// separate this into two routes eventually
-					db.location.find({where: {campaignId: req.body.id}}).then(function(location) {
+					db.location.find({where: {campaignId: req.body.campaignId}}).then(function(location) {
 						location.updateAttributes({
 				    		street: req.body.street,
 				    		city: req.body.city,
