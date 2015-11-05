@@ -25,6 +25,9 @@ module.exports = function(sequelize, DataTypes) {
         min: 8
       }
     },
+    pic: {
+      type: DataTypes.STRING
+    }
   }, {
     classMethods: {
       associate: function(models) {

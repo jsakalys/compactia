@@ -5,6 +5,13 @@ var router = express.Router();
 // Loads models
 var db = require("./../models");
 
+// Loads multer
+var multer = require('multer');
+var upload = multer({ dest: './uploads/' });
+
+// Require cloudinary
+var cloudinary = require('cloudinary');
+
 // Require passport
 var passport = require('passport');
 
@@ -112,8 +119,10 @@ router.get('/create', function(req, res){
 router.get('/account', function(req, res){
 	// only show if user logged in, else redirect to signup page
 	if (req.user) {
+		var userPic = cloudinary.url(req.user.pic, { width: 150, height: 150, crop: 'crop', gravity: 'face',radius: 'max' });
 		res.render('account', {
-			layout: 'layouts/account-view'
+			layout: 'layouts/account-view',
+			userPic: userPic
 		});
 	} else {
 		res.send('Access denied: you are not logged in.')	
@@ -135,6 +144,25 @@ router.put('/account', function(req, res){
 		});
 	} else {
 		res.send('Access denied: you are not logged in.')	
+	};
+});
+
+// Catches image upload for user profile pic
+router.post('/account', upload.single('userPicture'), function(req,res){
+	// only allow if user is logged in, else redirect to signup page
+	if (req.user) {
+		db.user.find({where: {id: req.user.id}}).then(function(user){
+			cloudinary.uploader.upload(req.file.path, function(result) {
+		    	//store public_id from the result in database
+		    	user.updateAttributes({
+					pic: result.public_id
+				}).then(function(){
+		    		res.redirect('/account');
+				});
+		  	});
+		});
+	} else {
+		res.send('Access denied: you are not logged in.')
 	};
 });
 
