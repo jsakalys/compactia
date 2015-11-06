@@ -1,0 +1,69 @@
+p {
+    text-align: justify;
+}
+* {
+    outline: none;
+}
+.dropdown-menu .divider {
+    margin: 0px 5px;
+}
+.right-col {
+    padding-left: 15px;
+}
+.note {
+    line-height: 25px;
+    text-align: justify;
+    margin-bottom: 20px;
+}
+.note-ul {
+    border-bottom: solid 1px #f0f0f0;
+}
+.campaign {
+    text-align: left;
+    display: inline-block;
+    vertical-align: middle;
+}
+.insignia {
+    margin-left: 15px;
+    margin-top: -70px;
+}
+.campaign-title {
+    display: inline-block;
+    margin: 15px;
+    padding: 0px;
+    line-height: 30px;
+}
+.insignia .avatar {
+    margin: 0px;
+}
+.stat-table {
+    margin: 0 auto;
+    margin-top: 0px;
+}
+.stat-table td {
+    padding: 3px;
+    line-height: 20px;
+    vertical-align: middle;
+    border: none;
+}
+.stat-table label {
+    text-transform: capitalize;
+}
+.card-user .content {
+    min-height: 260px;
+}
+.create-icon {
+    font-size: 100px;
+    color: lightGray;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+.create-icon:hover {
+    color: gray;
+}
+.big-register {
+    margin-top: 20px;
+}
+.big-login {
+    margin-left: 20px;
+}

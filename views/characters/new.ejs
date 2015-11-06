@@ -12,7 +12,7 @@
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <label>Name <small>(required)</small></label>
-                                        <input type="text" class="form-control" name="name" placeholder="Ex. Legolas">
+                                        <input id="newCharacterName" type="text" class="form-control" name="name" placeholder="Ex. Legolas">
                                         <!-- Hidden input for user ID -->
                                          <input type="hidden" class="form-control" name="id" value="3">
                                     </div>        
@@ -20,13 +20,13 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>Exp</label>
-                                        <input type="number" class="form-control" name="exp" placeholder="0">
+                                        <input id="newCharacterExp" type="number" class="form-control" name="exp" placeholder="0">
                                     </div>        
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Gold</label>
-                                        <input type="number" class="form-control" name="gold" placeholder="0">
+                                        <input id="newCharacterGold" type="number" class="form-control" name="gold" placeholder="0">
                                     </div>        
                                 </div>
                             </div>
@@ -34,13 +34,13 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>Race</label>
-                                        <input type="text" class="form-control" name="race" placeholder="ex. Elf">
+                                        <input id="newCharacterRace" type="text" class="form-control" name="race" placeholder="ex. Elf">
                                     </div>        
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>Gender</label>
-                                        <input type="text" class="form-control" name="gender" placeholder="ex. Male">
+                                        <input id="newCharacterGender" type="text" class="form-control" name="gender" placeholder="ex. Male">
                                     </div>        
                                 </div>
                                 <div class="col-sm-5">
@@ -54,19 +54,19 @@
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <label>Class</label>
-                                        <input type="text" class="form-control" name="class" placeholder="Ex. Ranger">
+                                        <input id="newCharacterClass" type="text" class="form-control" name="class" placeholder="Ex. Ranger">
                                     </div>        
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>Hit Points</label>
-                                        <input type="number" class="form-control" name="hp" placeholder="0">
+                                        <input id="newCharacterHealth" type="number" class="form-control" name="hp" placeholder="0">
                                     </div>        
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Defense</label>
-                                        <input type="number" class="form-control" name="def" placeholder="0">
+                                        <input id="newCharacterDefense" type="number" class="form-control" name="def" placeholder="0">
                                     </div>        
                                 </div>
                             </div>
@@ -92,10 +92,14 @@
                     <div class="content">
                         <div class="author">
                             <img class="avatar border-gray" src="/img/default-avatar.png" alt="Default Profile"/>
-                            <h4 class="title">Legolas<br>
-                                <small>Elf Ranger</small>
+                            <h4 class="title">
+                                <span id="newCharacterNameCard">Legolas</span>
+                                <br>
+                                <small id="newCharacterRaceCard">Elf</small> 
+                                <small id="newCharacterClassCard">Ranger</small>
                             </h4>
-                            <button class="btn btn-simple" style="margin-top: 5px"><i class="pe-7s-male"></i>
+                            <button id="newCharacterGenderCard" class="btn btn-simple" style="margin-top: 5px">
+                                <i class="pe-7s-male"></i>
                             </button>
                         </div>
                         <div class="col-sm-8 col-sm-offset-2">
@@ -109,7 +113,7 @@
                                             <label>Health</label>
                                         </td>
                                         <td style="text-align: center; width: 30px">
-                                            <label>0</label>
+                                            <label id="newCharacterHealthCard">0</label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -120,7 +124,7 @@
                                             <label>Defense</label>
                                         </td>
                                         <td style="text-align: center">
-                                            <label>0</label>
+                                            <label id="newCharacterDefenseCard">0</label>
                                         </td>
                                     </tr>
                                 </table>
@@ -131,16 +135,19 @@
                     <div class="row">
                     	<div class="col-xs-4 text-left">
                         	<button class="btn btn-simple">
-                        		<i class="pe-7s-medal"></i> <label>0</label>
+                        		<i class="pe-7s-medal"></i> 
+                                <label id="newCharacterExpCard">0</label>
                         	</button>
                         </div>
                         <div class="col-xs-4 text-center">
-                        	<button class="btn btn-simple"><i class="pe-7s-more"></i>
+                        	<button class="btn btn-simple">
+                                <i class="pe-7s-more"></i>
                         	</button>
                         </div>
                         <div class="col-xs-4 text-right">
                         	<button class="btn btn-simple">
-                        		<i class="pe-7s-diamond"></i> <label>0</label>
+                        		<i class="pe-7s-diamond"></i> 
+                                <label id="newCharacterGoldCard">0</label>
                         	</button>
                         </div>
                     </div>

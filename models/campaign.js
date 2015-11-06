@@ -51,6 +51,15 @@ module.exports = function(sequelize, DataTypes) {
         models.campaign.hasMany(models.note);
       }
     },
+    instanceMethods: {
+      checkPassword: function(password, callback){
+        if (password && this.password) {
+          bcrypt.compare(password, this.password, callback);
+        } else {
+          callback(null, false);
+        }
+      }
+    },
     hooks: {
       beforeCreate: function(campaign, options, callback) {
         if (!campaign.password) return callback(null, campaign);

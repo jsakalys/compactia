@@ -1,7 +1,8 @@
 var editCard = function(cardId) {
     $(cardId + ' .edit').on('click', function(e){
     e.preventDefault();
-    $(cardId + ' input, textarea').prop('readonly', false);
+    $(cardId + ' input').prop('readonly', false);
+    $(cardId + ' textarea').prop('readonly', false);
     $(cardId + ' select').attr('disabled', false);
     $(cardId + ' .edit').toggleClass('hidden');
     $(cardId + ' .saveChanges').toggleClass('hidden');   
@@ -11,14 +12,32 @@ var editCard = function(cardId) {
 var saveCard = function(cardId) {
     $(cardId + ' .save').on('click', function(e){
     //e.preventDefault();
-    $(cardId + ' input, textarea').prop('readonly', true);
+    $(cardId + ' input').prop('readonly', true);
+    $(cardId + ' textarea').prop('readonly', true);
     $(cardId + ' select').attr('disabled', true);
     $(cardId + ' .edit').toggleClass('hidden');
     $(cardId + ' .saveChanges').toggleClass('hidden');
     }); 
 };
 
+var realTimeEdit = function(inputId) {
+    $(inputId).change(function() {
+        $(inputId + 'Card').html($(inputId).val());
+    });
+};
+
+var realTimeGenderEdit = function(inputId) {
+    $(inputId).change(function() {
+        if ($(this).val().toLowerCase() == 'female') {
+            $(inputId + 'Card').html('<i class="pe-7s-female"></i>');
+        } else {
+            $(inputId + 'Card').html('<i class="pe-7s-male"></i>');
+        };
+    });
+};
+
 $(document).ready(function(){
+
     editCard('#characterInfo');
     saveCard('#characterInfo');
     editCard('#campaignInfo');
@@ -32,6 +51,16 @@ $(document).ready(function(){
     editCard('#characterCampaign');
     saveCard('#characterCampaign');
 
+    realTimeEdit('#newCharacterName');
+    realTimeEdit('#newCharacterRace');
+    realTimeEdit('#newCharacterClass');
+    realTimeEdit('#newCharacterHealth');
+    realTimeEdit('#newCharacterDefense');
+    realTimeEdit('#newCharacterExp');
+    realTimeEdit('#newCharacterGold');
+    realTimeGenderEdit('#newCharacterGender');
+
+    $('#campaignLink').popover();
     $('.user-pic').tooltip();
 
     $('.login-form').on('submit', function(e) {
@@ -41,8 +70,7 @@ $(document).ready(function(){
                 console.log('passed');
                 window.location.replace("/create");            
             } else {
-            /*   Simulate error message from the server   */
-                 shakeModal();
+                shakeModal();
             };
         });
     });
@@ -55,13 +83,9 @@ $(document).ready(function(){
             method:'PUT',
             url:myUrl,
             data:myData
-        }).done(function(){
-            if ($(this).attr('id', 'addCharacter') || $(this).attr('id', 'removeCharacter')) {
-                window.location.replace("");
-            }
+        }).success(function(){
+            window.location.reload();
         });
     });
-
-    $('#campaignLink').popover()
 
 });

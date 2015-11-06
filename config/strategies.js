@@ -7,25 +7,20 @@ module.exports = {
 	  usernameField: 'email'
 	},
 	function(email, password, done) {
-    console.log("*****************");
-    console.log("email: "+email+", password: "+password);
-    console.log("*****************");
 	  db.user.find({where: {email: email}}).then(function(user) {
-		if (user) {
-		  user.checkPassword(password, function(err, result) {
-  			if (err) return done(err);
-  			if (result) {
-          console.log("Got a user!");
-  			  done(null, user.get());
-  			} else {
-          console.log("Bad password");
-  			  done(null, false, {message: 'Invalid password'});
-  			}
-		  });
-		} else {
-		  done(null, false, {message: 'Unknown user'});
-		}
-	  });
+  		if (user) {
+  		  user.checkPassword(password, function(err, result) {
+    			if (err) return done(err);
+    			if (result) {
+    			  done(null, user.get());
+    			} else {
+    			  done(null, false, {message: 'Invalid password'});
+    			}
+  		  });
+  		} else {
+  		  done(null, false, {message: 'Unknown user'});
+  		}
+  	});
 	}
   ),
 	facebookStrategy: new FacebookStrategy({

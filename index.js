@@ -35,10 +35,6 @@ passport.deserializeUser(strategies.deserializeUser);
 passport.use(strategies.localStrategy);
 passport.use(strategies.facebookStrategy);
 
-// Require isUnique validator
-// var Sequelize = require('sequelize');
-// require('sequelize-isunique-validator')(Sequelize);
-
 // Use middleware for currentUser and alerts
 app.use(function(req,res,next){
   res.locals.currentUser = req.user;

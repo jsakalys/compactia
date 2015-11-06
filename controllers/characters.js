@@ -20,8 +20,8 @@ router.get('/list', function(req,res){
 	if (req.user) {
 		db.user.findOne({where: {id: req.user.id}}).then(function(user){
 			user.getCharacters().then(function(characters){
+				var characterImages = {};
 				if (characters[0]) {
-					var characterImages = {};
 					characters.forEach(function(character){
 						characterImages[character.id] = {};
 						characterImages[character.id].environment = cloudinary.url(character.environment, {width: 2600, height: 800, crop: "fill", gravity: "center"});
@@ -39,7 +39,7 @@ router.get('/list', function(req,res){
 		});
 	} else {
 		res.send('Access denied: you are not logged in.')
-	}
+	};
 });
 
 // Shows a form to make a new character

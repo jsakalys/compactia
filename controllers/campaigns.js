@@ -40,7 +40,7 @@ router.get('/list', function(req,res){
 	// look up current user in database, find all campaigns for that user and pass them in
 	if (req.user) {
 		db.campaign.findAll({where: {ownerId: req.user.id}}).then(function(campaigns){
-			if (campaigns) {
+			if (campaigns[0]) {
 				var campaignImages = {};
 				campaigns.forEach(function(campaign){
 					campaignImages[campaign.id] = {};

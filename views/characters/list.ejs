@@ -1,8 +1,7 @@
 <div class="content">
     <div class="container-fluid">
-        <div class="col-sm-12">
         <div class="row">
-        <% characters.forEach(function(character){ %>
+            <% characters.forEach(function(character){ %>
             <div class="col-sm-4">
                 <a href="/characters/<%= character.name %>">
                     <div class="card card-user">
@@ -11,43 +10,65 @@
                         </div>
                         <div class="content">
                             <div class="author">
-                                 <!--<a href="#">-->
                                 <img class="avatar border-gray" src="<%= characterImages[character.id].profile %>" alt="Profile for <%= character.name %>"/>
-                                  <h4 class="title"><%= character.name %><br />
-                                     <small><%= character.class %></small>
-                                  </h4>
-                                <!--</a>-->
+                                <h4 class="title"><%= character.name %>
+                                    <br>
+                                    <small><%=  %></small>
+                                </h4>
+                                <button class="btn btn-simple" style="margin-top: 5px"><i class="pe-7s-<%= %>"></i>
+                                </button>
                             </div>  
-                            <div class="text-center">
-                            	<button class="btn btn-simple">
-                            		<i class="pe-7s-way" style="margin-top:10px"></i>
-                            		<br />
-                            		<small><%= character.birthplace %></small>
-                            	</button>
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <div class="center-block">
+                                    <table class="stat-table">
+                                        <tr>
+                                            <td style="text-align: center; width: 30px">
+                                                <i class="pe-7s-like"></i>
+                                            </td>
+                                            <td style="width: 60px">
+                                                <label>Health</label>
+                                            </td>
+                                            <td style="text-align: center; width: 30px">
+                                                <label><%=  %></label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center; width: 30px">
+                                                <i class="pe-7s-shield"></i>
+                                            </td>
+                                            <td style="width: 60px">
+                                                <label>Defense</label>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <label><%=  %></label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
-                        	<div class="col-xs-4 text-left">
-                            	<button class="btn btn-simple">
-                            		<i class="pe-7s-medal"></i> <label><%= character.exp %></label>
-                            	</button>
+                            <div class="col-xs-4 text-left">
+                                <button class="btn btn-simple">
+                                    <i class="pe-7s-medal"></i> <label><%= character.exp %></label>
+                                </button>
                             </div>
                             <div class="col-xs-4 text-center">
-                            	<button href="#" class="btn btn-simple"><i class="pe-7s-more"></i>
-                            	</button>
+                                <button class="btn btn-simple">
+                                    <i class="pe-7s-more"></i>
+                                </button>
                             </div>
                             <div class="col-xs-4 text-right">
-                            	<button class="btn btn-simple">
-                            		<i class="pe-7s-diamond"></i> <label><%= character.gold %></label>
-                            	</button>
+                                <button class="btn btn-simple">
+                                    <i class="pe-7s-diamond"></i> <label><%= character.gold %></label>
+                                </button>
                             </div>
                         </div>
-                    </div>
-                </a>
-            </div> 
-        <% }) %>      
-        </div>                    
-    </div>
-    </div>
+                    </a>
+                </div>
+            </div>
+            <% }); %>  
+        </div>                       
+    </div> 
 </div>
