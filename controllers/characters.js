@@ -61,8 +61,19 @@ router.post('/new', function(req,res){
 			    name: req.body.name,
 			    exp: parseInt(req.body.exp),
 			    gold: parseInt(req.body.gold)
-			}).then(function() {
-			    res.redirect('list');
+			}).then(function(character) {
+				db.attribute.create({
+					race: req.body.race,
+				    gender: req.body.gender,
+				    birthplace: req.body.birthplace,
+				    class: req.body.class,
+				    hp: parseInt(req.body.hp),
+				    def: parseInt(req.body.def),
+				    desc: req.body.desc,
+				    characterId: character.id
+				}).then(function(){
+					res.redirect('list');	
+				});
 			});
 		});
 	} else {
@@ -83,13 +94,16 @@ router.get('/:name', function(req,res){
 				environment: cloudinary.url(character.environment, {width: 2600, height: 800, crop: "fill", gravity: "center"}),
 				profile: cloudinary.url(character.profile, {width: 256, height: 256, crop: "fill", gravity: "face"}),
 			};
-			character.getCampaign().then(function(campaign){
-				res.render('characters/show', {
-					layout: 'layouts/account-view',
-					character: character,
-					characterImages: characterImages,
-					campaign: campaign
-				});	
+			db.attribute.find({where: {characterId: character.id}}).then(function(attribute){
+				character.getCampaign().then(function(campaign){
+					res.render('characters/show', {
+						layout: 'layouts/account-view',
+						character: character,
+						characterImages: characterImages,
+						campaign: campaign,
+						attribute: attribute
+					});	
+				});
 			});
 		});
 	} else {
@@ -140,18 +154,27 @@ router.put('/:name', function(req,res){
 	// only allow access priviliges if user is logged in
 	if (req.user) {
 		// find character of param name belonging to current user
-			db.character.find({where: {
-				userId: req.user.id,
-				name: req.params.name
-			}}).then(function(character){
-				character.updateAttributes({
-		    		name: req.body.name,
-		    		exp: parseInt(req.body.exp),
-		    		gold: parseInt(req.body.gold)
-		  		}).then(function() {
-		  			// don't need anything here, cause ajax
-		  		});
+		db.character.find({where: {userId: req.user.id, name: req.params.name}}).then(function(character){
+			character.updateAttributes({
+	    		name: req.body.name,
+	    		exp: parseInt(req.body.exp),
+	    		gold: parseInt(req.body.gold)
+		    }).then(function(character){
+		    	db.attribute.find({where: {characterId: character.id}}).then(function(attribute){
+		    		attribute.updateAttributes({
+	    				race: req.body.race,
+			    		gender: req.body.gender,
+			    		birthplace: req.body.birthplace,
+			    		class: req.body.class,
+			    		hp: parseInt(req.body.hp),
+			    		def: parseInt(req.body.def),
+			    		desc: req.body.desc,
+		    		}).then(function(){
+			  			// don't need anything here, cause ajax
+		    		});
+		    	});
 			});
+		});
 	} else {
 		res.send('Access denied: you are not logged in.');
 	};

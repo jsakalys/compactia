@@ -40,19 +40,39 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>Race</label>
-                                        <input type="text" class="form-control" name="race" value="" readonly>
+                                        <input type="text" class="form-control" name="race" value="<%= attribute.race %>" readonly>
                                     </div>        
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label>Class</label>
-                                        <input type="text" class="form-control" name="class" value="" readonly>
+                                        <label>Gender</label>
+                                        <input type="text" class="form-control" name="gender" value="<%= attribute.gender %>" readonly>
                                     </div>        
                                 </div>
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <label>Birthplace</label>
-                                        <input type="text" class="form-control" name="birthplace" value="" readonly>
+                                        <input type="text" class="form-control" name="birthplace" value="<%= attribute.birthplace %>" readonly>
+                                    </div>        
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label>Class</label>
+                                        <input type="text" class="form-control" name="class" value="<%= attribute.class %>" readonly>
+                                    </div>        
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Hit Points</label>
+                                        <input type="number" class="form-control" name="hp" value="<%= attribute.hp %>" readonly>
+                                    </div>        
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label>Defense</label>
+                                        <input type="number" class="form-control" name="def" value="<%= attribute.def %>" readonly>
                                     </div>        
                                 </div>
                             </div>
@@ -60,7 +80,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Description</label>
-                                        <textarea rows="10" class="form-control" name="desc" value="" readonly></textarea>
+                                        <textarea rows="15" class="form-control" name="desc" readonly><%= attribute.desc %></textarea>
                                     </div>        
                                 </div>
                             </div>
