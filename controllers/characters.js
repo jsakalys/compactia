@@ -5,6 +5,13 @@ var router = express.Router();
 // Loads models
 var db = require("./../models");
 
+// Loads multer
+var multer = require('multer');
+var upload = multer({ dest: './uploads/' });
+
+// Require cloudinary
+var cloudinary = require('cloudinary');
+
 /* Routers */
 
 // Shows a list of characters belonging to the current user
@@ -13,11 +20,17 @@ router.get('/list', function(req,res){
 	if (req.user) {
 		db.user.findOne({where: {id: req.user.id}}).then(function(user){
 			user.getCharacters().then(function(characters){
-				console.log(characters);
 				if (characters[0]) {
+					var characterImages = {};
+					characters.forEach(function(character){
+						characterImages[character.id] = {};
+						characterImages[character.id].environment = cloudinary.url(character.environment, {width: 2600, height: 800, crop: "fill", gravity: "center"});
+						characterImages[character.id].profile = cloudinary.url(character.profile, {width: 256, height: 256, crop: "fill", gravity: "face"});
+					});
 					res.render('characters/list', {
 						layout: 'layouts/account-view',
-						characters: characters
+						characters: characters,
+						characterImages: characterImages
 					});
 				} else {
 					res.redirect('/characters/new');
@@ -66,16 +79,59 @@ router.get('/:name', function(req,res){
 			userId: req.user.id,
 			name: req.params.name
 		}}).then(function(character){
+			var characterImages = {
+				environment: cloudinary.url(character.environment, {width: 2600, height: 800, crop: "fill", gravity: "center"}),
+				profile: cloudinary.url(character.profile, {width: 256, height: 256, crop: "fill", gravity: "face"}),
+			};
 			character.getCampaign().then(function(campaign){
 				res.render('characters/show', {
 					layout: 'layouts/account-view',
 					character: character,
+					characterImages: characterImages,
 					campaign: campaign
 				});	
 			});
 		});
 	} else {
 		res.send('Access denied: you are not logged in.');
+	};
+});
+
+// Catches image upload for character profile
+router.post('/profile/:id', upload.single('characterProfile'), function(req,res){
+	// only allow if user is logged in, else redirect to signup page
+	if (req.user) {
+		db.character.find({where: {id: req.params.id}}).then(function(character){
+			cloudinary.uploader.upload(req.file.path, function(result) {
+		    	//store public_id from the result in database
+		    	character.updateAttributes({
+					profile: result.public_id
+				}).then(function(){
+		    		res.redirect('/characters/list');
+				});
+		  	});
+		});
+	} else {
+		res.send('Access denied: you are not logged in.')
+	};
+});
+
+// Catches image upload for character environment
+router.post('/environment/:id', upload.single('characterEnvironment'), function(req,res){
+	// only allow if user is logged in, else redirect to signup page
+	if (req.user) {
+		db.character.find({where: {id: req.params.id}}).then(function(character){
+			cloudinary.uploader.upload(req.file.path, function(result) {
+		    	//store public_id from the result in database
+		    	character.updateAttributes({
+					environment: result.public_id
+				}).then(function(){
+		    		res.redirect('/characters/list');
+				});
+		  	});
+		});
+	} else {
+		res.send('Access denied: you are not logged in.')
 	};
 });
 

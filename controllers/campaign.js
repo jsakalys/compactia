@@ -15,22 +15,31 @@ router.get('/:identifier', function(req, res){
 	// only show if user is logged in
 	if (req.user) {
 		db.campaign.findOne({where: {identifier: req.params.identifier}}).then(function(campaign){
-			// only show if current user is associated with campaign
-			campaign.getUsers().then(function(users){
-				var userImages = {}
-				users.forEach(function(user){
-					userImages[user.id] = cloudinary.url(user.pic, {width: 100, height: 100, crop: "fill", gravity: "face"});
-					if (user.id == req.user.id) {
-						campaign.getNotes({order: [['createdAt', 'DESC']]}).then(function(notes){
-							res.render('campaign/main', {
-								layout: 'layouts/campaign-view',
-								campaign: campaign,
-								users: users,
-								notes: notes,
-								userImages: userImages
-							});
-						});
+			db.location.findOne({where: {campaignId: campaign.id}}).then(function(location){
+				// only show if current user is associated with campaign
+				campaign.getUsers().then(function(users){
+					var userImages = {};
+					var campaignImages = {
+						banner: cloudinary.url(campaign.banner, {width: 2600, height: 800, crop: "fill", gravity: "center"}),
+						insignia: cloudinary.url(campaign.insignia, {width: 256, height: 256, crop: "fill", gravity: "center"}),
 					};
+					users.forEach(function(user){
+						userImages[user.id] = cloudinary.url(user.pic, {width: 100, height: 100, crop: "fill", gravity: "face"});
+						if (user.id == req.user.id) {
+							campaign.getNotes({order: [['createdAt', 'DESC']]}).then(function(notes){
+								res.render('campaign/main', {
+									layout: 'layouts/campaign-view',
+									campaign: campaign,
+									location: location,
+									users: users,
+									notes: notes,
+									//activity: activity,
+									userImages: userImages,
+									campaignImages: campaignImages
+								});
+							});
+						};
+					});
 				});
 			});
 		});

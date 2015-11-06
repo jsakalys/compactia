@@ -1,85 +1,136 @@
 <div class="content">
-    <div class="container-fluid">    
-        <div class="row">
-            <div class="col-sm-8">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title"><%= campaign.name %></h4>
-                        <p class="category">
-                        Summary
-                        </p>
+    <div class="container-fluid">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="card card-user">
+                            <a href="/campaign/<%= campaign.identifier %>">
+                                <div class="image">
+                                    <img src="<%= campaignImages.banner %>" alt="Banner for <%= campaign.name %>"/>   
+                                </div>
+                                <div class="insignia pull-left">
+                                    <a href="/campaign/<%= campaign.identifier %>">
+                                        <img class="avatar border-gray" src="<%= campaignImages.insignia %>" alt="Insignia for <%= campaign.name %>"/>
+                                    </a>
+                                </div>
+                                <div class="campaign">
+                                    <h4 class="campaign-title"><%= campaign.name %>
+                                        <small> <%= campaign.status %></small>
+                                    </h4>
+                                </div>
+                                <div class="campaign pull-right">
+                                    <button id="campaignLink" class="btn btn-simple campaign-title" data-toggle="popover" title="Permanent Link" data-content="<textarea>http://compactia.com/campaign/<%= campaign.identifier %></textarea>" data-placement="left" data-html="true">
+                                        <small><i class="pe-7s-link"></i> Link</small>
+                                    </button>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                    <div class="content">
-                    <% if (campaign.desc) { %>
-                        <blockquote>                            
-                            <p><%= campaign.desc %></p>
-                        </blockquote>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">  
+                    <div class="row">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title"><%= campaign.name %></h4>
+                                <p class="category">
+                                Summary
+                                </p>
+                            </div>
+                            <div class="content">
+                            <% if (campaign.desc) { %>
+                                <blockquote>                            
+                                    <p><%= campaign.desc %></p>
+                                </blockquote>
+                            <% }; %>
+                                <div class="footer">
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-history"></i>
+                                        Updated <%= campaign.updatedAt %>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <% if (notes[0]) { %>
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title"><%= notes[0].title %></h4>
+                                <p class="category">New Note</p>
+                            </div>
+                            <div class="content">
+                                <div class="note">
+                                    <span class="note-ul"><%= notes[0].body %></span>
+                                </div>
+                                <div class="footer">
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-clock-o"></i> 
+                                        Created <%= notes[0].createdAt %>
+                                    </div>                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <% }; %>
-                        <div class="footer">
-                            <hr>
-                            <div class="stats">
-                                <i class="fa fa-history"></i>
-                                Updated <%= campaign.updatedAt %>
-                            </div>                                    
+                </div>     
+                <div class="col-sm-4 right-col">
+                    <div class="row right-col">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Members</h4>
+                                <p class="category">Total: <%= users.length %></p>
+                            </div>
+                            <div class="content">
+                                <div>
+                                <% users.forEach(function(user){ %>
+                                <img src="<%= userImages[user.id] %>" width="50" height="50" class="user-pic img-circle" data-toggle="tooltip" title="<%= user.name %>">
+                                <% }) %>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>          
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title">Campaign Members</h4>
-                        <p class="category">Total: <%= users.length %></p>
-                    </div>
-                    <div class="content">
-                        <div>
-                        <% users.forEach(function(user){ %>
-                        <img src="<%= userImages[user.id] %>" width="50" height="50" class="user-pic img-circle" data-toggle="tooltip" title="<%= user.name %>">
-                        <% }) %>
+                    <div class="row right-col">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Location</h4>
+                                <p class="category"><%= campaign.type %></p>
+                            </div>
+                            <% // if (location[0]) { %>
+                            <div class="content">
+                                <div>
+                                    <address>
+                                        <%= location.street %><br>
+                                        <%= location.city %>, <%= location.state %><br>
+                                        <%= location.country %>, <%= location.zip %><br>
+                                        
+                                    </address>
+                                </div>
+                            </div>
+                            <% // }; %>
                         </div>
                     </div>
-                </div>
+                    <div class="row right-col">
+                    <% // if (activity[0]) { %>
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Recent Activity</h4>
+                                <p class="category"></p>
+                            </div>
+                            <div class="content">
+                                <div>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                    <% // }; %>
+                    </div>
+        		</div>
             </div>
         </div>
-        <div class="row">
-        <% if (notes[0]) { %>
-            <div class="col-sm-8">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title"><%= notes[0].title %></h4>
-                        <p class="category">New Note</p>
-                    </div>
-                    <div class="content">
-                        <div class="note">
-                            <span class="note-ul"><%= notes[0].body %></span>
-                        </div>
-                        <div class="footer">
-                            <hr>
-                            <div class="stats">
-                                <i class="fa fa-clock-o"></i> 
-                                Created <%= notes[0].createdAt %>
-                            </div>                                 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <% } else { %>
-            <div class="col-sm-8">
-            </div>
-        <% }; %>
-			<div class="col-sm-4">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title">Recent Activity</h4>
-                        <p class="category"></p>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <p></p>
-                        </div>
-                    </div>
-                </div>
-			</div>
-		</div>
 	</div>
 </div>

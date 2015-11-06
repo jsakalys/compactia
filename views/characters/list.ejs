@@ -1,18 +1,18 @@
 <div class="content">
     <div class="container-fluid">
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-sm-12">
         <div class="row">
         <% characters.forEach(function(character){ %>
             <div class="col-sm-4">
                 <a href="/characters/<%= character.name %>">
                     <div class="card card-user">
                         <div class="image">
-                            <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>   
+                            <img src="<%= characterImages[character.id].environment %>" alt="Environment for <%= character.name %>"/>   
                         </div>
                         <div class="content">
                             <div class="author">
                                  <!--<a href="#">-->
-                                <img class="avatar border-gray" src="/img/faces/face-3.jpg" alt="..."/>
+                                <img class="avatar border-gray" src="<%= characterImages[character.id].profile %>" alt="Profile for <%= character.name %>"/>
                                   <h4 class="title"><%= character.name %><br />
                                      <small><%= character.class %></small>
                                   </h4>

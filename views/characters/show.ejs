@@ -71,10 +71,55 @@
                 </div>
             </div>
             <div class="col-sm-4">
+                <div class="card card-user">
+                    <div class="image">
+                        <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>   
+                    </div>
+                    <div class="content">
+                        <div class="author">
+                             <!--<a href="#">-->
+                            <img class="avatar border-gray" src="/img/faces/face-3.jpg" alt="..."/>
+                           
+                              <h4 class="title"><%= character.name %><br />
+                                 <small><%= character.class %></small>
+                              </h4> 
+                            <!--</a>-->
+                        </div>  
+                        <div class="text-center">
+                            <button class="btn btn-simple">
+                                <i class="pe-7s-way" style="margin-top:10px"></i>
+                                <br />
+                                <small><!-- birthplace --></small>
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-4 text-left">
+                            <button class="btn btn-simple">
+                                <i class="pe-7s-medal"></i> <label><%= character.exp %></label>
+                            </button>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <button class="btn btn-simple"><i class="pe-7s-more"></i>
+                            </button>
+                        </div>
+                        <div class="col-xs-4 text-right">
+                            <button class="btn btn-simple">
+                                <i class="pe-7s-diamond"></i> <label><%= character.gold %></label>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             <% if (campaign) { %>
-                <div class="card">
+                <div id="characterCampaign" class="card">
                     <div class="header">
-                        <h4 class="title">Current Campaign<br />
+                        <h4 class="title">Character Campaign
+                         <% if (character.userId == currentUser.id) { %>
+                            <button class="btn btn-simple edit">
+                                <small><i class="pe-7s-note"></i> Edit</small>
+                            </button>
+                        <% }; %>
                         </h4>
                     </div>
                     <div class="content">
@@ -90,7 +135,7 @@
                                     </div>    
                                 </div>
                             </div>
-                            <input type="submit" class="btn btn-danger btn-fill pull-right" value="Remove Character">
+                            <input type="submit" class="btn btn-danger btn-fill pull-right hidden save saveChanges" value="Leave Campaign">
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -121,49 +166,38 @@
                                     </div>     
                                 </div>
                             </div>
-                            <input type="submit" class="btn btn-info btn-fill pull-right" value="Add Character">
+                            <input type="submit" class="btn btn-info btn-fill pull-right" value="Join Campaign">
                             <div class="clearfix"></div>
                         </form>
                     </div>
                 </div>    
                 <% }; %>
-                <div class="card card-user">
-                    <div class="image">
-                        <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>   
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Character Graphics</h4>
                     </div>
                     <div class="content">
-                        <div class="author">
-                             <!--<a href="#">-->
-                            <img class="avatar border-gray" src="/img/faces/face-3.jpg" alt="..."/>
-                           
-                              <h4 class="title"><%= character.name %><br />
-                                 <small><%= character.class %></small>
-                              </h4> 
-                            <!--</a>-->
-                        </div>  
-                        <div class="text-center">
-                        	<button class="btn btn-simple">
-                        		<i class="pe-7s-way" style="margin-top:10px"></i>
-                        		<br />
-                        		<small><!-- birthplace --></small>
-                        	</button>
+                        <div class="form-group">
+                            <label>Character Profile</label>
+                            <form enctype="multipart/form-data" action="profile/<%= character.id %>" method="POST">
+                                <div class="input-group">
+                                    <input type="file" class="form-control" name="characterProfile">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-fill btn-default" type="submit">Upload</button>
+                                    </span>
+                                </div>
+                            </form>
                         </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                    	<div class="col-xs-4 text-left">
-                        	<button class="btn btn-simple">
-                        		<i class="pe-7s-medal"></i> <label><%= character.exp %></label>
-                        	</button>
-                        </div>
-                        <div class="col-xs-4 text-center">
-                        	<button class="btn btn-simple"><i class="pe-7s-more"></i>
-                        	</button>
-                        </div>
-                        <div class="col-xs-4 text-right">
-                        	<button class="btn btn-simple">
-                        		<i class="pe-7s-diamond"></i> <label><%= character.gold %></label>
-                        	</button>
+                        <div class="form-group">
+                            <label>Character Environment</label>
+                            <form enctype="multipart/form-data" action="environment/<%= character.id %>" method="POST">
+                                <div class="input-group">
+                                    <input type="file" class="form-control" name="characterEnvironment">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-fill btn-default" type="submit">Upload</button>
+                                    </span>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

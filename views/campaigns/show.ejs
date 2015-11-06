@@ -1,106 +1,114 @@
 <div class="content">
     <div class="container-fluid">
-  		<div class="row">
-            <div class="col-sm-12">
-                <div class="card card-user">
-                    <div class="image">
-                        <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..."/>
-                    </div>
-                    <div class="row">
-	                    <div class="col-xs-6">
-	                        <button href="http://facebook.com" class="btn btn-simple" alt="share on Facebook">
-	                        	<i class="fa fa-facebook-square"></i> <label><%= campaign.name %></label>
-	                        </button> 
-	                    </div>
-	                    <div class="col-xs-6 text-right">
-	                        <button href="#" class="btn btn-simple" alt="share on Facebook">
-	                        	<i class="fa fa-facebook-square"></i></button>
-	                        <button href="#" class="btn btn-simple" alt="tweet this campaign">
-	                        	<i class="fa fa-twitter"></i></button>
-	                        <button href="#" class="btn btn-simple" alt="share on google plus">
-	                        	<i class="fa fa-google-plus-square"></i></button>
-	                    </div>
+        <div class="col-sm-8">
+      		<div class="col-sm-12">
+                <div class="row">
+                    <div class="card card-user">
+                        <a href="/campaign/<%= campaign.identifier %>">
+                            <div class="image">
+                                <img src="<%= campaignImages.banner %>" alt="Banner for <%= campaign.name %>"/>   
+                            </div>
+                            <div class="insignia pull-left">
+                                <a href="/campaign/<%= campaign.identifier %>">
+                                    <img class="avatar border-gray" src="<%= campaignImages.insignia %>" alt="Insignia for <%= campaign.name %>"/>
+                                </a>
+                            </div>
+                            <div class="campaign">
+                                <h4 class="campaign-title"><%= campaign.name %>
+                                    <small> <%= campaign.status %></small>
+                                </h4>
+                            </div>
+                            <div class="campaign pull-right">
+                                <button id="campaignLink" class="btn btn-simple campaign-title" data-toggle="popover" title="Permanent Link" data-content="<textarea>http://compactia.com/campaign/<%= campaign.identifier %></textarea>" data-placement="left" data-html="true">
+                                    <small><i class="pe-7s-link"></i> Link</small>
+                                </button>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div id="campaignInfo" class="card">
-                    <div class="header">
-                        <h4 class="title">Campaign Details 
-                        <% if (campaign.ownerId == currentUser.id) { %>
-                        	<button class="btn btn-simple edit">
-                        		<small><i class="pe-7s-note"></i> Edit</small>
-                        	</button>
-                        <% }; %>
-                        </h4>
-                    </div>
-                    <div class="content">
-                        <form action="" class="put-form">
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <div class="form-group">
-                                        <label>Name</label>
-                                        <input type="text" class="form-control" name="name" value="<%= campaign.name %>" readonly>
-                                        <!-- Hidden input to carry ID -->
-                                        <input type="text" class="form-control hidden" name="campaignId" value="<%= campaign.id %>">
-                                        <input type="text" class="form-control hidden" name="ownerId" value="<%= campaign.ownerId %>">
-                                    </div>        
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>ID</label>
-                                        <input type="text" class="form-control" name="identifier" value="<%= campaign.identifier %>" readonly>
-                                    </div>        
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Type</label>
-                                        <input type="text" class="form-control" name="type" value="<%= campaign.type %>" readonly>
-                                    </div>        
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Status</label>
-                                        <select class="form-control" name="status" disabled>
-                                            <option>Active</option>
-                                            <option>Inactive</option>
-                                            <option>On Hiatus</option>
-                                            <option>Retired</option>
-                                        </select>
-                                    </div>        
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label>Description</label>
-                                        <textarea rows="5" class="form-control" name="desc" readonly><%= campaign.desc %></textarea>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="campaignInfo" class="card">
+                        <div class="header">
+                            <h4 class="title">Campaign Details 
+                            <% if (campaign.ownerId == currentUser.id) { %>
+                            	<button class="btn btn-simple edit">
+                            		<small><i class="pe-7s-note"></i> Edit</small>
+                            	</button>
+                            <% }; %>
+                            </h4>
+                        </div>
+                        <div class="content">
+                            <form action="" class="put-form">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            <input type="text" class="form-control" name="name" value="<%= campaign.name %>" readonly>
+                                            <!-- Hidden input to carry ID -->
+                                            <input type="text" class="form-control hidden" name="campaignId" value="<%= campaign.id %>">
+                                            <input type="text" class="form-control hidden" name="ownerId" value="<%= campaign.ownerId %>">
+                                        </div>        
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>ID</label>
+                                            <input type="text" class="form-control" name="identifier" value="<%= campaign.identifier %>" readonly>
+                                        </div>        
                                     </div>
                                 </div>
-                            </div>
-                            <button type="submit" class="btn btn-info btn-fill pull-right hidden save saveChanges">Save Changes</button>
-                            <div class="clearfix"></div>
-                        </form>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Type</label>
+                                            <input type="text" class="form-control" name="type" value="<%= campaign.type %>" readonly>
+                                        </div>        
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <select class="form-control" name="status" disabled>
+                                                <option>Active</option>
+                                                <option>Inactive</option>
+                                                <option>On Hiatus</option>
+                                                <option>Retired</option>
+                                            </select>
+                                        </div>        
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea rows="15" class="form-control" name="desc" readonly><%= campaign.desc %></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-info btn-fill pull-right hidden save saveChanges">Save Changes</button>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
                     </div>
                 </div>
+            </div>                    
+        </div>
+        <div class="col-sm-4">
+            <div class="row">
                 <div id="campaignLocation" class="card">
                     <div class="header">
                         <h4 class="title">Campaign Location 
-                        	<button class="btn btn-simple edit">
+                            <button class="btn btn-simple edit">
                             <% if (campaign.ownerId == currentUser.id) { %>
-                        		<small><i class="pe-7s-note"></i> Edit</small>
+                                <small><i class="pe-7s-note"></i> Edit</small>
                             <% }; %>
-                        	</button>
+                            </button>
                         </h4>
                     </div>
                     <div class="content">
                         <form action="" class="put-form">
                             <div class="row">
-                                <div class="col-sm-7">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Street</label>
                                         <input type="text" class="form-control" name="street" value="<%= location.street %>" readonly>
@@ -108,27 +116,29 @@
                                         <input type="text" class="form-control hidden" name="campaignId" value="<%= campaign.id %>">
                                     </div>        
                                 </div>
-                                <div class="col-sm-5">
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>City</label>
                                         <input type="text" class="form-control" name="city" value="<%= location.city %>" readonly>
                                     </div>        
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-5">
+                                <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>State</label>
                                         <input type="text" class="form-control" name="state" value="<%= location.state %>" readonly>
                                     </div>        
                                 </div>
-                                <div class="col-sm-4">
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-8">
                                     <div class="form-group">
                                         <label>Country</label>
                                         <input type="text" class="form-control" name="country" value="<%= location.country %>" readonly>
                                     </div>        
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>Postal Code</label>
                                         <input type="text" class="form-control" name="zip" value="<%= location.zip %>" readonly>
@@ -141,6 +151,37 @@
                     </div>
                 </div>
             </div>
-        </div>                    
+            <div class="row">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Campaign Graphics</h4>
+                    </div>
+                    <div class="content">
+                        <div class="form-group">
+                            <label>Campaign Insignia</label>
+                            <form enctype="multipart/form-data" action="insignia/<%= campaign.identifier %>" method="POST">
+                                <div class="input-group">
+                                    <input type="file" class="form-control" name="campaignInsignia">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-fill btn-default" type="submit">Upload</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="form-group">
+                            <label>Campaign Banner</label>
+                            <form enctype="multipart/form-data" action="banner/<%= campaign.identifier %>" method="POST">
+                                <div class="input-group">
+                                    <input type="file" class="form-control" name="campaignBanner">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-fill btn-default" type="submit">Upload</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

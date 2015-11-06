@@ -35,6 +35,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     ownerId: {
       type: DataTypes.INTEGER
+    },
+    banner: {
+      type: DataTypes.STRING
+    },
+    insignia: {
+      type: DataTypes.STRING
     }
   }, {
     classMethods: {

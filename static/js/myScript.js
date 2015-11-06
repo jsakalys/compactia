@@ -29,6 +29,8 @@ $(document).ready(function(){
     saveCard('#accountInfo');
     editCard('#noteInfo');
     saveCard('#noteInfo');
+    editCard('#characterCampaign');
+    saveCard('#characterCampaign');
 
     $('.user-pic').tooltip();
 
@@ -59,5 +61,7 @@ $(document).ready(function(){
             }
         });
     });
+
+    $('#campaignLink').popover()
 
 });

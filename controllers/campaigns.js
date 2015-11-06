@@ -5,15 +5,29 @@ var router = express.Router();
 // Loads models
 var db = require("./../models");
 
+// Loads multer
+var multer = require('multer');
+var upload = multer({ dest: './uploads/' });
+
+// Require cloudinary
+var cloudinary = require('cloudinary');
+
 /* Routers */
 
 // Lists all campaigns in database
 router.get('/all', function(req,res){
 	if (req.user) {
 		db.campaign.findAll().then(function(campaigns){
+			var campaignImages = {};
+			campaigns.forEach(function(campaign){
+				campaignImages[campaign.id] = {};
+				campaignImages[campaign.id].banner = cloudinary.url(campaign.banner, {width: 2600, height: 800, crop: "fill", gravity: "center"});
+				campaignImages[campaign.id].insignia = cloudinary.url(campaign.insignia, {width: 256, height: 256, crop: "fill", gravity: "center"});
+			});
 			res.render('campaigns/list', {
 				layout: 'layouts/account-view',
-				campaigns: campaigns
+				campaigns: campaigns,
+				campaignImages: campaignImages
 			});
 		});
 	} else {
@@ -27,9 +41,16 @@ router.get('/list', function(req,res){
 	if (req.user) {
 		db.campaign.findAll({where: {ownerId: req.user.id}}).then(function(campaigns){
 			if (campaigns) {
+				var campaignImages = {};
+				campaigns.forEach(function(campaign){
+					campaignImages[campaign.id] = {};
+					campaignImages[campaign.id].banner = cloudinary.url(campaign.banner, {width: 2600, height: 800, crop: "fill", gravity: "center"});
+					campaignImages[campaign.id].insignia = cloudinary.url(campaign.insignia, {width: 256, height: 256, crop: "fill", gravity: "center"});
+				});
 				res.render('campaigns/list', {
 					layout: 'layouts/account-view',
-					campaigns: campaigns
+					campaigns: campaigns,
+					campaignImages: campaignImages
 				});
 			} else {
 				res.redirect('/campaigns/new');
@@ -98,16 +119,59 @@ router.get('/:identifier', function(req,res){
 	// look up campaign in database, allow access priviliges only if associated user is current user
 	if (req.user) {
 		db.campaign.find({where: {identifier: req.params.identifier}}).then(function(campaign){
+			var campaignImages = {
+				banner: cloudinary.url(campaign.banner, {width: 2600, height: 800, crop: "fill", gravity: "center"}),
+				insignia: cloudinary.url(campaign.insignia, {width: 256, height: 256, crop: "fill", gravity: "center"}),
+			};
 			db.location.find({where: {campaignId: campaign.id}}).then(function(location){
 				res.render('campaigns/show', {
 					layout: 'layouts/account-view',
 					campaign: campaign,
-					location: location
+					location: location,
+					campaignImages: campaignImages
 				});
 			});
 		});
 	} else {
 		res.send('Access denied: you are not logged in.');
+	};
+});
+
+// Catches image upload for campaign banner
+router.post('/banner/:identifier', upload.single('campaignBanner'), function(req,res){
+	// only allow if user is logged in, else redirect to signup page
+	if (req.user) {
+		db.campaign.find({where: {identifier: req.params.identifier}}).then(function(campaign){
+			cloudinary.uploader.upload(req.file.path, function(result) {
+		    	//store public_id from the result in database
+		    	campaign.updateAttributes({
+					banner: result.public_id
+				}).then(function(){
+		    		res.redirect('/campaigns/' + campaign.identifier);
+				});
+		  	});
+		});
+	} else {
+		res.send('Access denied: you are not logged in.')
+	};
+});
+
+// Catches image upload for campaign insignia
+router.post('/insignia/:identifier', upload.single('campaignInsignia'), function(req,res){
+	// only allow if user is logged in, else redirect to signup page
+	if (req.user) {
+		db.campaign.find({where: {identifier: req.params.identifier}}).then(function(campaign){
+			cloudinary.uploader.upload(req.file.path, function(result) {
+		    	//store public_id from the result in database
+		    	campaign.updateAttributes({
+					insignia: result.public_id
+				}).then(function(){
+		    		res.redirect('/campaigns/' + campaign.identifier);
+				});
+		  	});
+		});
+	} else {
+		res.send('Access denied: you are not logged in.')
 	};
 });
 

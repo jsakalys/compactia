@@ -23,6 +23,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true
     },
+    profile: {
+      type: DataTypes.STRING
+    },
+    environment: {
+      type: DataTypes.STRING
+    },
   }, {
     classMethods: {
       associate: function(models) {

@@ -1,4 +1,36 @@
-Campaign List
-<% campaigns.forEach(function(campaign){ %>
-	<a href="/campaign/<%= campaign.identifier %>"><%= campaign.name %></a><br>
-<% }) %>
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-sm-12">
+			<% campaigns.forEach(function(campaign){ %>
+			<div class="row">
+				<div class="card card-user">
+				    <a href="/campaign/<%= campaign.identifier %>">
+				        <div class="image">
+				            <img src="<%= campaignImages[campaign.id].banner %>" alt="Banner for <%= campaign.name %>"/>   
+				        </div>
+				        <div class="insignia pull-left">
+				            <a href="/campaign/<%= campaign.identifier %>">
+				                <img class="avatar border-gray" src="<%= campaignImages[campaign.id].insignia %>" alt="Insignia for <%= campaign.name %>"/>
+				            </a>
+				        </div>
+				        <div class="campaign">
+				            <h4 class="campaign-title"><%= campaign.name %>
+				                <small> <%= campaign.status %></small>
+				            </h4>
+				        </div>
+				        <div class="campaign pull-right">
+				        <% if (campaign.ownerId == currentUser.id) { %>
+				            <a href="/campaigns/<%= campaign.identifier %>">
+				                <button class="btn btn-simple campaign-title">
+				                    <small><i class="pe-7s-note"></i> Edit</small>
+				                </button>
+				            </a>
+				        <% }; %>
+				        </div>
+				    </a>
+				</div>
+			</div>
+			<% }) %>
+		</div>
+	</div>
+</div>
