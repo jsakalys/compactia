@@ -58,10 +58,19 @@ router.get('/characters/:identifier', function(req, res){
 				users.forEach(function(user){
 					if (user.id == req.user.id) {
 						campaign.getCharacters().then(function(characters){
+							var characterImages = {};
+							if (characters[0]) {
+								characters.forEach(function(character){
+									characterImages[character.id] = {};
+									characterImages[character.id].environment = cloudinary.url(character.environment, {width: 2600, height: 800, crop: "fill", gravity: "center"});
+									characterImages[character.id].profile = cloudinary.url(character.profile, {width: 256, height: 256, crop: "fill", gravity: "face"});
+								});
+							};
 							res.render('characters/list', {
 								layout: 'layouts/campaign-view',
 								campaign: campaign,
-								characters: characters
+								characters: characters,
+								characterImages: characterImages
 							});
 						});
 					};
