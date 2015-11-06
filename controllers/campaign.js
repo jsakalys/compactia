@@ -32,6 +32,7 @@ router.get('/:identifier', function(req, res){
 						});
 						users.forEach(function(user){
 							if (user.id == req.user.id) {
+								console.log(user.id + ' ' + req.user.id)
 								res.render('campaign/main', {
 									layout: 'layouts/campaign-view',
 									campaign: campaign,
@@ -44,6 +45,7 @@ router.get('/:identifier', function(req, res){
 								});
 							};
 						});
+						res.redirect('/campaign/join/'+req.params.identifier);
 					});
 				});
 			});
@@ -142,13 +144,21 @@ router.post('/join/:identifier', function(req,res){
 		// Search for campaign and add user to it if password matches
 		db.campaign.findOne({where: {identifier: req.params.identifier}}).then(function(campaign){
 			// check if user entered the correct campaign password
-			bcrypt.compare(req.body.password, campaign.password, function(err, result) {
+			var decrypted;
+			bcrypt.hash(req.body.password, 10, function(err, hash){
+				decrypted = hash
+			});
+			bcrypt.compare(decrypted, campaign.password, function(err, result) {
     			if (result) {
+    				console.log('hitting pass')
 					db.user.findOne({where: {id: req.user.id}}).then(function(user){
 						campaign.addUser(user).then(function(){
-							res.redirect('/campaign/' + campaign.identifier);
+							res.redirect('/campaign/'+req.params.identifier);
 						});
 					});
+    			} else {
+    				console.log('hitting else')
+    				res.redirect('/campaign/join/'+req.params.identifier);
     			};
 			});
 		});
