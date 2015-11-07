@@ -35,6 +35,7 @@ module.exports = function(sequelize, DataTypes) {
         // associations can be defined here
         models.character.belongsTo(models.user);
         models.character.belongsTo(models.campaign);
+        models.character.hasOne(models.attribute);
       }
     }
   });

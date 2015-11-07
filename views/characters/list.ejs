@@ -13,9 +13,11 @@
                                 <img class="avatar border-gray" src="<%= characterImages[character.id].profile %>" alt="Profile for <%= character.name %>"/>
                                 <h4 class="title"><%= character.name %>
                                     <br>
-                                    <small><%=  %></small>
+                                    <small>
+                                        <%= character.attribute['race'] %> <%= character.attribute['class'] %>
+                                    </small>
                                 </h4>
-                                <button class="btn btn-simple" style="margin-top: 5px"><i class="pe-7s-<%= %>"></i>
+                                <button class="btn btn-simple" style="margin-top: 5px"><i class="pe-7s-<%= character.attribute['gender'].toLowerCase() %>"></i>
                                 </button>
                             </div>  
                             <div class="col-sm-8 col-sm-offset-2">
@@ -29,7 +31,7 @@
                                                 <label>Health</label>
                                             </td>
                                             <td style="text-align: center; width: 30px">
-                                                <label><%=  %></label>
+                                                <label><%= character.attribute['hp'] %></label>
                                             </td>
                                         </tr>
                                         <tr>
@@ -40,7 +42,7 @@
                                                 <label>Defense</label>
                                             </td>
                                             <td style="text-align: center">
-                                                <label><%=  %></label>
+                                                <label><%= character.attribute['def'] %></label>
                                             </td>
                                         </tr>
                                     </table>

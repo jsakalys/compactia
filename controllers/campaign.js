@@ -82,6 +82,7 @@ router.get('/characters/:identifier', function(req, res){
 						});
 					};
 				});
+				res.redirect('/campaign/join/'+req.params.identifier);
 			});
 		});
 	} else {
@@ -107,6 +108,7 @@ router.get('/notes/:identifier', function(req, res){
 						});
 					};
 				});
+				res.redirect('/campaign/join/'+req.params.identifier);
 			});
 		});
 	} else {
@@ -144,11 +146,11 @@ router.post('/join/:identifier', function(req,res){
 		// Search for campaign and add user to it if password matches
 		db.campaign.findOne({where: {identifier: req.params.identifier}}).then(function(campaign){
 			// check if user entered the correct campaign password
-			var decrypted;
-			bcrypt.hash(req.body.password, 10, function(err, hash){
-				decrypted = hash
-			});
-			bcrypt.compare(decrypted, campaign.password, function(err, result) {
+			// var decrypted;
+			// bcrypt.hash(req.body.password, 10, function(err, hash){
+			// 	decrypted = hash
+			// });
+			bcrypt.compare(req.body.password, campaign.password, function(err, result) {
     			if (result) {
     				console.log('hitting pass')
 					db.user.findOne({where: {id: req.user.id}}).then(function(user){
@@ -199,6 +201,10 @@ router.put('/character/remove', function(req,res){
 	} else {
 		res.send('Access denied: you are not logged in.');
 	};
+});
+
+router.get('/:catchall', function(req,res){
+	res.sendStatus(404);
 });
 
 // Exports router

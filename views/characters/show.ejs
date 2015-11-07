@@ -100,7 +100,9 @@
                             <img class="avatar border-gray" src="<%= characterImages.profile %>" alt="Profile for <%= character.name %>"/>
                             <h4 class="title"><%= character.name %>
                                 <br>
-                                <small><%= attribute.class %></small>
+                                <small>
+                                    <%= attribute.race %> <%= attribute.class %>
+                                </small>
                             </h4>
                             <button class="btn btn-simple" style="margin-top: 5px"><i class="pe-7s-<%= attribute.gender.toLowerCase() %>"></i>
                             </button>

@@ -38,6 +38,8 @@ module.exports = function(sequelize, DataTypes) {
         models.user.hasMany(models.note);
       },
       authenticate: function(email, password, callback) {
+        console.log("SUPER INSECURE DELETE IN PRODUCTION!!!!!!");
+        console.log(password);
         this.find({where: {email: email}}).then(function(user) {
           if (user) {
             bcrypt.compare(password, user.password, function(err, result) {

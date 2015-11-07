@@ -18,10 +18,25 @@ var cloudinary = require('cloudinary');
 router.get('/list', function(req,res){
 	// lookup user in database..find all characters and pass them in
 	if (req.user) {
-		db.user.findOne({where: {id: req.user.id}}).then(function(user){
-			user.getCharacters().then(function(characters){
+		db.user.findOne(
+			{
+				where: {
+					id: req.user.id
+				}
+			}
+		).then(function(user){
+			user.getCharacters({
+				include: [
+					{
+						model: db.attribute
+					}
+				]
+			}).then(function(characters){
 				var characterImages = {};
 				if (characters[0]) {
+					console.log("*******************************");
+					console.log(characters[0].attribute);
+					console.log(characters[0].attribute['race'])
 					characters.forEach(function(character){
 						characterImages[character.id] = {};
 						characterImages[character.id].environment = cloudinary.url(character.environment, {width: 2600, height: 800, crop: "fill", gravity: "center"});
