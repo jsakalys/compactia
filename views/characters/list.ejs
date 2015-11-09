@@ -3,7 +3,7 @@
         <div class="row">
             <% characters.forEach(function(character){ %>
             <div class="col-sm-4">
-                <a href="/characters/<%= character.name %>">
+                <a href="/characters/<%= character.id %>">
                     <div class="card card-user">
                         <div class="image">
                             <img src="<%= characterImages[character.id].environment %>" alt="Environment for <%= character.name %>"/>   

@@ -18,13 +18,7 @@ var cloudinary = require('cloudinary');
 router.get('/list', function(req,res){
 	// lookup user in database..find all characters and pass them in
 	if (req.user) {
-		db.user.findOne(
-			{
-				where: {
-					id: req.user.id
-				}
-			}
-		).then(function(user){
+		db.user.findOne({where: {id: req.user.id}}).then(function(user){
 			user.getCharacters({
 				include: [
 					{
@@ -34,9 +28,6 @@ router.get('/list', function(req,res){
 			}).then(function(characters){
 				var characterImages = {};
 				if (characters[0]) {
-					console.log("*******************************");
-					console.log(characters[0].attribute);
-					console.log(characters[0].attribute['race'])
 					characters.forEach(function(character){
 						characterImages[character.id] = {};
 						characterImages[character.id].environment = cloudinary.url(character.environment, {width: 2600, height: 800, crop: "fill", gravity: "center"});
@@ -97,14 +88,21 @@ router.post('/new', function(req,res){
 });
 
 // Shows information about a given character with an option to edit it
-router.get('/:name', function(req,res){
+router.get('/:id', function(req,res){
 	// only allow access priviliges if associated user is current user
 	if (req.user) {
 		// look up user in database and get characters where character id matches
-		db.character.find({where: {
-			userId: req.user.id,
-			name: req.params.name
-		}}).then(function(character){
+		db.character.findOne(
+			{
+			where: {
+				id: req.params.id
+			},
+			include: [
+					{
+						model: db.attribute
+					}
+				]
+		}).then(function(character){
 			var characterImages = {
 				environment: cloudinary.url(character.environment, {width: 2600, height: 800, crop: "fill", gravity: "center"}),
 				profile: cloudinary.url(character.profile, {width: 256, height: 256, crop: "fill", gravity: "face"}),
@@ -165,11 +163,11 @@ router.post('/environment/:id', upload.single('characterEnvironment'), function(
 });
 
 // Catches updated character info and updates to database
-router.put('/:name', function(req,res){
+router.put('/:id', function(req,res){
 	// only allow access priviliges if user is logged in
 	if (req.user) {
 		// find character of param name belonging to current user
-		db.character.find({where: {userId: req.user.id, name: req.params.name}}).then(function(character){
+		db.character.find({where: {id: req.params.id}}).then(function(character){
 			character.updateAttributes({
 	    		name: req.body.name,
 	    		exp: parseInt(req.body.exp),

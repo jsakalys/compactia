@@ -19,7 +19,6 @@ router.get('/:identifier', function(req, res){
 	if (req.user) {
 		db.campaign.findOne({where: {identifier: req.params.identifier}}).then(function(campaign){
 			db.location.findOne({where: {campaignId: campaign.id}}).then(function(location){
-				// only show if current user is associated with campaign
 				campaign.getUsers().then(function(users){
 					campaign.getNotes({order: [['createdAt', 'DESC']]}).then(function(notes){
 						var userImages = {};
@@ -30,16 +29,17 @@ router.get('/:identifier', function(req, res){
 						users.forEach(function(user){
 							userImages[user.id] = cloudinary.url(user.pic, {width: 100, height: 100, crop: "fill", gravity: "face"});
 						});
+						// only show if current user is a member of that campaign
 						users.forEach(function(user){
 							if (user.id == req.user.id) {
-								console.log(user.id + ' ' + req.user.id)
+								console.log('comparing campaign and user');
+								console.log(user.id + ' ' + req.user.id);
 								res.render('campaign/main', {
 									layout: 'layouts/campaign-view',
 									campaign: campaign,
 									location: location,
 									users: users,
 									notes: notes,
-									//activity: activity,
 									userImages: userImages,
 									campaignImages: campaignImages
 								});
@@ -62,9 +62,17 @@ router.get('/characters/:identifier', function(req, res){
 		db.campaign.findOne({where: {identifier: req.params.identifier}}).then(function(campaign){
 			// only show if current user is associated with campaign
 			campaign.getUsers().then(function(users){
-				users.forEach(function(user){
-					if (user.id == req.user.id) {
-						campaign.getCharacters().then(function(characters){
+				campaign.getCharacters({
+					include: [
+						{
+						model: db.attribute
+						}
+					]
+				}).then(function(characters){
+					users.forEach(function(user){
+						if (user.id == req.user.id) {
+							console.log('User confirmed as part of campaign.');
+							console.log('Listing characters in campaign..');
 							var characterImages = {};
 							if (characters[0]) {
 								characters.forEach(function(character){
@@ -73,16 +81,17 @@ router.get('/characters/:identifier', function(req, res){
 									characterImages[character.id].profile = cloudinary.url(character.profile, {width: 256, height: 256, crop: "fill", gravity: "face"});
 								});
 							};
+							console.log('rendering page...');
 							res.render('characters/list', {
 								layout: 'layouts/campaign-view',
 								campaign: campaign,
 								characters: characters,
 								characterImages: characterImages
 							});
-						});
-					};
+						};
+					});
+					res.redirect('/campaign/join/'+req.params.identifier);
 				});
-				res.redirect('/campaign/join/'+req.params.identifier);
 			});
 		});
 	} else {
@@ -97,18 +106,18 @@ router.get('/notes/:identifier', function(req, res){
 		db.campaign.findOne({where: {identifier: req.params.identifier}}).then(function(campaign){
 			// only show if current user is associated with campaign
 			campaign.getUsers().then(function(users){
-				users.forEach(function(user){
-					if (user.id == req.user.id) {
-						campaign.getNotes().then(function(notes){
+				campaign.getNotes().then(function(notes){
+					users.forEach(function(user){
+						if (user.id == req.user.id) {
 							res.render('notes/list', {
 								layout: 'layouts/campaign-view',
 								campaign: campaign,
 								notes: notes
 							});
-						});
-					};
+						};
+					});
+					res.redirect('/campaign/join/'+req.params.identifier);
 				});
-				res.redirect('/campaign/join/'+req.params.identifier);
 			});
 		});
 	} else {
@@ -146,20 +155,14 @@ router.post('/join/:identifier', function(req,res){
 		// Search for campaign and add user to it if password matches
 		db.campaign.findOne({where: {identifier: req.params.identifier}}).then(function(campaign){
 			// check if user entered the correct campaign password
-			// var decrypted;
-			// bcrypt.hash(req.body.password, 10, function(err, hash){
-			// 	decrypted = hash
-			// });
 			bcrypt.compare(req.body.password, campaign.password, function(err, result) {
     			if (result) {
-    				console.log('hitting pass')
 					db.user.findOne({where: {id: req.user.id}}).then(function(user){
 						campaign.addUser(user).then(function(){
 							res.redirect('/campaign/'+req.params.identifier);
 						});
 					});
     			} else {
-    				console.log('hitting else')
     				res.redirect('/campaign/join/'+req.params.identifier);
     			};
 			});

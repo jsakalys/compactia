@@ -67,3 +67,7 @@ p {
 .big-login {
     margin-left: 20px;
 }
+
+.card {
+    box-shadow: none;
+}
