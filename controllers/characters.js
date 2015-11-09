@@ -103,6 +103,7 @@ router.get('/:id', function(req,res){
 					}
 				]
 		}).then(function(character){
+			console.log(character);
 			var characterImages = {
 				environment: cloudinary.url(character.environment, {width: 2600, height: 800, crop: "fill", gravity: "center"}),
 				profile: cloudinary.url(character.profile, {width: 256, height: 256, crop: "fill", gravity: "face"}),
@@ -115,7 +116,7 @@ router.get('/:id', function(req,res){
 						characterImages: characterImages,
 						campaign: campaign,
 						attribute: attribute
-					});	
+					});
 				});
 			});
 		});
@@ -191,6 +192,11 @@ router.put('/:id', function(req,res){
 	} else {
 		res.send('Access denied: you are not logged in.');
 	};
+});
+
+// Catchall for invalid urls
+router.get('/:catchall', function(req,res){
+	res.redirect('/');
 });
 
 // Exports router

@@ -215,6 +215,7 @@
                     </div>
                 </div>    
                 <% }; %>
+                <% if (character.userId == currentUser.id) { %>
                 <div class="card">
                     <div class="header">
                         <h4 class="title">Character Graphics</h4>
@@ -244,6 +245,7 @@
                         </div>
                     </div>
                 </div>
+                <% }; %>
             </div>       
         </div>                    
     </div>

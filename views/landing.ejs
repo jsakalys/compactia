@@ -1,47 +1,181 @@
 <!-- The following HTML was taken from Creative Tim's login and register modal and edited by me -->
 <div class="container">
+    <div class="col-sm-10 col-sm-offset-1">
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
-            <% if (!currentUser) { %>
-            <a class="btn big-login pull-right" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Log In</a>
-            <h5 class="pull-right text-muted">
-                Already have an account?
-            </h5>
-            <% }; %>
-            <% if (currentUser) { %>
-            <a class="btn big-login pull-right" data-toggle="modal" href="/logout">Log Out</a>
-            <% }; %>
+        <% if (!currentUser) { %>
+        <a class="btn big-login pull-right" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Log In</a>
+        <h5 class="pull-right text-muted">
+            Already have an account?
+        </h5>
+        <% }; %>
+        <% if (currentUser) { %>
+        <a class="btn big-login pull-right" data-toggle="modal" href="/logout">Log Out</a>
+        <% }; %>
+    </div>
+    <div class="row">
+        <div class="content">
+            <h1>
+                <i class="pe-7s-notebook"></i>
+                Compactia
+                <small>A compact RPG manager</small>
+            </h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
-            <div class="content">
-                <h1>
-                    <i class="pe-7s-notebook"></i>
-                    Compactia
-                    <small>A compact RPG manager</small>
-                </h1>
+        <div class="jumbotron">
+            <h2>
+                Compactia is a browser-based campaign manager for role-players and story gamers.
+            </h2>
+            <p>Sign up and start exploring some of its amazing features.</p>
+            <p>
+                <a class="btn big-register" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="content">
+            <h3>
+                What is Compactia?
+            </h3>
+            <h4>
+                Compactia is a table-top RPG manager built with the player and game master in mind. It offers users a space to create and store unlimited characters and/or campaigns, with the option to include any number of characters in a given campaign.
+            </h4>
+            <h4>
+                Within Compactia, each campaign possesses a collective dashboard--a collaborative space where campaign members can chat, plan, share notes, inventory, and party information all in one place.
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <h2 class="text-center">Benefits</h2>
+        <div class="col-sm-5">
+            <h4 class="text-center">For Players</h4>
+            <div class="list-group">
+                <h5 class="list-group-item-heading">
+                    <strong>Character/Campaign Exclusivity</strong>
+                </h5>
+                <p class="list-group-item-text">
+                    Save and have access to all of your characters, regardless of what campaigns they are in.
+                </p>
+            </div>
+            <div class="list-group">
+                <h5 class="list-group-item-heading">
+                    <strong>Campaign Auditing</strong>
+                </h5>
+                <p class="list-group-item-text">
+                    Join a campaign without having to make a character first. Add as many characters as you like to a campaign.
+                </p>
+            </div>
+            <div class="list-group">
+                <h5 class="list-group-item-heading">
+                    <strong>Campaign Portal</strong>
+                </h5>
+                <p class="list-group-item-text">
+                    Access campaign notes, logs, maps, chat, and party inventory all in one place.
+                </p>
+            </div>
+            <div class="list-group">
+                <h5 class="list-group-item-heading">
+                    <strong>Character Customization</strong>
+                </h5>
+                <p class="list-group-item-text">
+                    Upload custom character profile and environment images to be displayed on each character's unique card.
+                </p>
+            </div>
+            <div class="list-group">
+                <h5 class="list-group-item-heading">
+                    <strong>Character Inventory</strong>
+                </h5>
+                <p class="list-group-item-text">
+                    Keep track of each character's inventory and gold, so that you never forget about your special gear again.
+                </p>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-10 col-sm-offset-1">
-            <div class="jumbotron">
-                <h2>
-                    Compactia is a browser-based campaign manager for role-players and story gamers.
-                </h2>
-                <p>Sign up and start exploring some of its amazing features.</p>
-                <p>
-                    <a class="btn big-register" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a>
+        <div class="col-sm-5 col-sm-offset-2">
+            <h4 class="text-center">For Game Masters</h4>
+            <div class="list-group">
+                <h5 class="list-group-item-heading">
+                    <strong>Campaign Privacy</strong>
+                </h5>
+                <p class="list-group-item-text">
+                    Only users with your campaign id and password will be able to join.
+                </p>
+            </div>
+            <div class="list-group">
+                <h5 class="list-group-item-heading">
+                    <strong>Campaign Persistence</strong>
+                </h5>
+                <p class="list-group-item-text">
+                    Never lose your campaign history, even after it has completed. Access logs of past and current campaign activity.
+                </p>
+            </div>
+            <div class="list-group">
+                <h5 class="list-group-item-heading">
+                    <strong>Campaign Portal</strong>
+                </h5>
+                <p class="list-group-item-text">
+                    Access campaign notes, logs, maps, chat, and party inventory all in one place.
+                </p>
+            </div>
+            <div class="list-group">
+                <h5 class="list-group-item-heading">
+                    <strong>Campaign Customization</strong>
+                </h5>
+                <p class="list-group-item-text">
+                    Upload campaign insignia and banner images to be displayed on each campaign's unique display card.
+                </p>
+            </div>
+            <div class="list-group">
+                <h5 class="list-group-item-heading">
+                    <strong>Party Inventory</strong>
+                </h5>
+                <p class="list-group-item-text">
+                    Keep track of shared party inventory directly from the campaign page for easy reference.
                 </p>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1 text-right text-muted">
-            <div class="content">
-                Copyright &copy; 2015 <a href="http://juliesakalys.com">Julie Sakalys</a>
-            </div>
+        <h2 class="text-center">Features</h2>
+        <div class="col-sm-4">
+            <h4 class="text-center">
+                Character Profiles
+            </h4>
+        </div>
+        <div class="col-sm-4">
+            <h4 class="text-center">
+                Campaign Dashboard
+            </h4>
+        </div>
+        <div class="col-sm-4">
+            <h4 class="text-center">
+                Tablet and Mobile Friendly
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="content">
+            <h3>
+                About Compactia
+            </h3>
+            <h4>
+                Compactia is actively being developed by <a href="http://www.juliesakalys.com">Julie Sakalys</a>. If you like it, tell your friends. Better yet, tell your GM. Looking for a certain functionality? <a href="mailto:">Email me</a> a feature request. Alternatively, you can <a href="http://github.com/jsakalys/compactia">view the source code</a> on GitHub.
+            </h4>
+            <p class="pull-right text-muted">
+                <small>
+                    Copyright &copy; 2015 <a href="http://juliesakalys.com">Julie Sakalys</a>
+                </small>
+            <br>
+            <a href="http://github.com/jsakalys">
+                <i class="fa fa-github-square pull-right"></i></a>
+            <a href="http://linkedin.com/in/jsakalys">
+                <i class="fa fa-linkedin-square pull-right"></i></a>
+            <a href="http://twitter.com/juliesakalys">
+                <i class="fa fa-twitter-square pull-right"></i>
+            </a>
+            <a href="mailto:">
+                <i class="fa fa-envelope-o pull-right"></i>
+            </a>
+            </p>
         </div>
     </div>
 	<div class="modal fade login" id="loginModal">

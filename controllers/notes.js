@@ -101,5 +101,10 @@ router.put('/:title/:identifier', function(req,res){
 	};
 });
 
+// Catchall for invalid urls
+router.get('/:catchall', function(req,res){
+	res.redirect('/');
+});
+
 // Export router
 module.exports = router;

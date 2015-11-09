@@ -166,5 +166,10 @@ router.post('/account', upload.single('userPicture'), function(req,res){
 	};
 });
 
+// Catchall for invalid urls
+router.get('/:catchall', function(req,res){
+	res.redirect('/');
+});
+
 // Exports router
 module.exports = router;

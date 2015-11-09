@@ -57,9 +57,5 @@ app.use("/characters", require("./controllers/characters"));
 app.use("/notes", require("./controllers/notes"));
 app.use("/", require("./controllers/root"));
 
-app.get('/:catchall', function(req,res){
-	res.redirect('/');
-});
-
 // Listens on Port 3000
 app.listen(process.env.PORT || 3000);
