@@ -216,15 +216,15 @@
                     <div class="box">
                         <div class="content registerBox" style="display:none;">
                             <div class="form">
-                            	<form method="POST" html="{:multipart=>true}" data-remote="true" action="/signup" accept-charset="UTF-8">
+                            	<form id="signupForm" method="POST" html="{:multipart=>true}" data-remote="true" action="/signup" accept-charset="UTF-8">
                                     <label for="name" class="hidden">Your Name</label>
                                     <input id="name" class="form-control" type="text" placeholder="Your name" name="name" required>
                                     <label for="email" class="hidden">Your Email</label>
-                                    <input id="email" class="form-control" type="text" placeholder="Your email" name="email" required>
+                                    <input id="email" class="form-control" type="email" placeholder="Your email" name="email" required>
                                     <label for="password" class="hidden">Enter a Password</label>
-                                    <input id="password" class="form-control" type="password" placeholder="Enter a password" name="password" required>
+                                    <input id="password" minlength="8" class="form-control" type="password" placeholder="Enter a password" name="password" required>
                                     <label for="name" class="hidden">Re-enter Password</label>
-                                    <input id="password2" class="form-control" type="password" placeholder="Re-enter password" name="password2" required>
+                                    <input id="password2" minlength-"8" class="form-control" type="password" placeholder="Re-enter password" name="password2" required>
                                     <input class="btn btn-default btn-register" type="submit" value="Create account" name="commit">
                                 </form>
                             </div>

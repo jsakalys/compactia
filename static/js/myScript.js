@@ -88,4 +88,6 @@ $(document).ready(function(){
         });
     });
 
+    $("#signupForm").validate();
+
 });

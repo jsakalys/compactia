@@ -31,11 +31,11 @@ router.post('/signup', function(req, res){
 		res.redirect('/');
 	} else {
 		db.user.findOrCreate({where: { 
-			name: req.body.name, 
-			email: req.body.email, 
-			password: req.body.password 
+			email: req.body.email,
 		}}).spread(function(user, created) {
 			if (created) {
+				user.name = req.body.name;
+				user.password = req.body.password;
 				req.login(user, function(err){
 					res.redirect('/create');
 				});

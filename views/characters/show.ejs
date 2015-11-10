@@ -26,13 +26,13 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>Exp</label>
-                                        <input type="number" class="form-control" name="exp" value="<%= character.exp %>" readonly>
+                                        <input type="number" class="form-control" name="exp" min="0" step="1" value="<%= character.exp %>" readonly>
                                     </div>        
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Gold</label>
-                                        <input type="number" class="form-control" name="gold" value="<%= character.gold %>" readonly>
+                                        <input type="number" class="form-control" name="gold" min="0" step="1" value="<%= character.gold %>" readonly>
                                     </div>        
                                 </div>
                             </div>
@@ -66,13 +66,13 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>Hit Points</label>
-                                        <input type="number" class="form-control" name="hp" value="<%= attribute.hp %>" readonly>
+                                        <input type="number" class="form-control" name="hp" step="1" value="<%= attribute.hp %>" readonly>
                                     </div>        
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="form-group">
                                         <label>Defense</label>
-                                        <input type="number" class="form-control" name="def" value="<%= attribute.def %>" readonly>
+                                        <input type="number" class="form-control" name="def" min="0" step="1" value="<%= attribute.def %>" readonly>
                                     </div>        
                                 </div>
                             </div>
