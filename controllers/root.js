@@ -32,10 +32,10 @@ router.post('/signup', function(req, res){
 	} else {
 		db.user.findOrCreate({where: { 
 			email: req.body.email,
+			name: req.body.name,
+			password: req.body.password
 		}}).spread(function(user, created) {
 			if (created) {
-				user.name = req.body.name;
-				user.password = req.body.password;
 				req.login(user, function(err){
 					res.redirect('/create');
 				});
