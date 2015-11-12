@@ -59,11 +59,11 @@ router.post('/login',function(req,res){
 	  		req.login(user, function(err) {
 				if (err) throw err;
 				req.flash('success', 'You are now logged in.');
-				res.sendStatus('PASS');
+				res.sendStatus('200');
 			});
   		} else {
 	  		req.flash('danger', 'Invalid ID/password combo.');
-	  		res.sendStatus('FAIL');
+	  		res.sendStatus('400');
 		};
 	})(req, res);
 });

@@ -66,8 +66,7 @@ $(document).ready(function(){
     $('.login-form').on('submit', function(e) {
         e.preventDefault();
         $.post( "/login", $(this).serialize(), function(data) {
-            if (data == 'PASS') {
-                console.log('passed');
+            if (data == '200') {
                 window.location.replace("/create");            
             } else {
                 shakeModal();
