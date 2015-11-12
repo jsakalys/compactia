@@ -65,8 +65,8 @@ $(document).ready(function(){
 
     $('.login-form').on('submit', function(e) {
         e.preventDefault();
-        $.post( "/login", $(this).serialize(), function(data) {
-            if (data == '1') {
+        $.post( "/login", $(this).serialize(), function(serverResponse) {
+            if (serverResponse == 'HTTP/1.1 200 OK') {
                 window.location.replace("/create");            
             } else {
                 shakeModal();
