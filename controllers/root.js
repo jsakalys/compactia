@@ -30,20 +30,25 @@ router.post('/signup', function(req, res){
 		req.flash('danger', 'Passwords do not match.');
 		res.redirect('/');
 	} else {
-		db.user.findOrCreate({where: { 
-			email: req.body.email,
-			name: req.body.name,
-			password: req.body.password
+		db.user.findOrCreate({
+		where: {email: req.body.email},
+        defaults: {
+          password: req.body.password,
+          name: req.body.name
 		}}).spread(function(user, created) {
 			if (created) {
 				req.login(user, function(err){
+					if (err) throw err;
 					res.redirect('/create');
 				});
 			} else {
 				req.flash('danger', 'A user with that e-mail address already exists.');
 				res.redirect('/');
 			};
-		});
+		}).catch(function(err) {
+        	req.flash('danger', err.message);
+        	res.redirect('/auth/signup');
+      	});
 	};
 });
 
@@ -52,20 +57,12 @@ router.post('/login',function(req,res){
 	passport.authenticate('local', function(err, user, info) {
 		if (user) {
 	  		req.login(user, function(err) {
-				if (err) {
-					console.log('FAIL '+err);
-					res.sendStatus('FAIL');
-				} else {
-					//req.flash('success', 'You are now logged in.');
-					//res.redirect('/create');
-					console.log('PASS');
-					res.sendStatus('PASS');
-				};
-  			});
-		} else {
-	  		//req.flash('danger', 'Invalid ID/password combo.');
-	  		//res.redirect('/'); // add AJAX thing here
-	  		console.log('FAIL no user');
+				if (err) throw err;
+				req.flash('success', 'You are now logged in.');
+				res.sendStatus('PASS');
+			});
+  		} else {
+	  		req.flash('danger', 'Invalid ID/password combo.');
 	  		res.sendStatus('FAIL');
 		};
 	})(req, res);
