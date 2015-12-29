@@ -28,7 +28,11 @@
 				                </form>
 				            </div>
 				            <div class="col-sm-5">
-					            <img src="<%= userPic %>" class="img-circle center-block userPic"> 
+				            	<% if (userPic) { %>
+					            <img src="<%= userPic %>" class="img-circle center-block userPic">
+					            <% } else { %>
+					            <img src="/img/default-avatar.png" class="img-circle center-block userPic">
+					            <% }; %>
 					        	<div class="clearfix"></div>
 					        </div>
 				        </div>

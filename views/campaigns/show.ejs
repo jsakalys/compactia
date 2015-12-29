@@ -31,12 +31,14 @@
                 <div class="col-sm-12">
                     <div id="campaignInfo" class="card">
                         <div class="header">
-                            <h4 class="title">Campaign Details 
-                            <% if (campaign.ownerId == currentUser.id) { %>
-                            	<button class="btn btn-simple edit">
-                            		<small><i class="pe-7s-note"></i> Edit</small>
-                            	</button>
-                            <% }; %>
+                            <h4 class="title">
+                                Campaign Details
+                                <i class="pe-7s-notebook text-muted pull-right"></i>
+                                <% if (campaign.ownerId == currentUser.id) { %>
+                                	<button class="btn btn-simple edit">
+                                		<small><i class="pe-7s-note"></i> Edit</small>
+                                	</button>
+                                <% }; %>
                             </h4>
                         </div>
                         <div class="content">
@@ -97,7 +99,9 @@
             <div class="row">
                 <div id="campaignLocation" class="card">
                     <div class="header">
-                        <h4 class="title">Campaign Location 
+                        <h4 class="title">
+                            Campaign Location
+                            <i class="pe-7s-map-marker text-muted pull-right"></i>
                             <button class="btn btn-simple edit">
                             <% if (campaign.ownerId == currentUser.id) { %>
                                 <small><i class="pe-7s-note"></i> Edit</small>
@@ -154,7 +158,10 @@
             <div class="row">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Campaign Graphics</h4>
+                        <h4 class="title">
+                            Campaign Graphics
+                            <i class="pe-7s-paint-bucket text-muted pull-right"></i>
+                        </h4>
                     </div>
                     <div class="content">
                         <div class="form-group">

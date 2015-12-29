@@ -65,7 +65,7 @@ router.get('/list', function(req,res){
 router.get('/new', function(req,res){
 	// allow access priviliges only if logged in
 	if (req.user) {
-		res.render('campaigns/new', { layout: 'layouts/account-view' });
+		res.render('campaigns/new', { layout: 'layouts/account-view', cssFile: 'gsdk-base' });
 	} else {
 		res.send('Access denied: you are not logged in.')
 	};

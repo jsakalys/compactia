@@ -15,7 +15,10 @@
     <!-- Bootstrap 3 CSS -->
     <link href="/bootstrap3/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Creative Tim CSS -->
-    <link href="/css/gsdk-base.css" rel="stylesheet" />
+    <% var cssFile = cssFile || null; %>
+    <% if (cssFile) { %>
+    <link href="/css/<%= cssFile %>.css" rel="stylesheet" />
+    <% }; %>
     <link href="/css/light-bootstrap-dashboard.css" rel="stylesheet" />
     <!-- Animation library for notifications -->
     <link href="/css/animate.min.css" rel="stylesheet" />

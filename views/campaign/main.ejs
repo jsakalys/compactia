@@ -34,7 +34,11 @@
                     <div class="row">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title"><%= campaign.name %></h4>
+                                <h4 class="title">
+                                    <%= campaign.name %>
+                                    <i class="pe-7s-notebook text-muted pull-right"></i>
+                                </h4>
+
                                 <p class="category">
                                 Summary
                                 </p>
@@ -44,6 +48,10 @@
                                 <blockquote>                            
                                     <p><%= campaign.desc %></p>
                                 </blockquote>
+                            <% } else { %>                          
+                                <p class="text-muted">
+                                    There is no description for this campaign yet.
+                                </p>
                             <% }; %>
                                 <div class="footer">
                                     <hr>
@@ -59,7 +67,10 @@
                     <% if (notes[0]) { %>
                         <div class="card">
                             <div class="header">
-                                <h4 class="title"><%= notes[0].title %></h4>
+                                <h4 class="title">
+                                    <%= notes[0].title %>
+                                    <i class="pe-7s-news-paper text-muted pull-right"></i>
+                                </h4>
                                 <p class="category">New Note by <%= notes[0].author %></p>
                             </div>
                             <div class="content">
@@ -82,13 +93,20 @@
                     <div class="row right-col">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Members</h4>
+                                <h4 class="title">
+                                    Members
+                                    <i class="pe-7s-user text-muted pull-right"></i>
+                                </h4>
                                 <p class="category">Total: <%= users.length %></p>
                             </div>
                             <div class="content">
                                 <div>
                                 <% users.forEach(function(user){ %>
-                                <img src="<%= userImages[user.id] %>" width="50" height="50" class="user-pic img-circle" data-toggle="tooltip" title="<%= user.name %>">
+                                    <% if (userImages[user.id]) { %>
+                                        <img src="<%= userImages[user.id] %>" width="50" height="50" class="user-pic img-circle" data-toggle="tooltip" title="<%= user.name %>">
+                                    <% } else { %>
+                                        <img src="/img/default-avatar.png" width="50" height="50" class="user-pic img-circle" data-toggle="tooltip" title="<%= user.name %>">
+                                    <% } %>
                                 <% }) %>
                                 </div>
                             </div>
@@ -97,11 +115,14 @@
                     <div class="row right-col">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Location</h4>
+                                <h4 class="title">
+                                    Location
+                                    <i class="pe-7s-map-marker text-muted pull-right"></i>
+                                </h4>
                                 <p class="category"><%= campaign.type %></p>
                             </div>
-                            <% // if (location[0]) { %>
                             <div class="content">
+                                <% if (location.street) { %>
                                 <div>
                                     <address>
                                         <%= location.street %><br>
@@ -110,24 +131,31 @@
                                         
                                     </address>
                                 </div>
+                                <% } else { %>
+                                <div class="text-muted">
+                                    No location provided.
+                                </div>
+                                <% }; %>
                             </div>
-                            <% // }; %>
                         </div>
                     </div>
                     <div class="row right-col">
-                    <% // if (activity[0]) { %>
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Recent Activity</h4>
+                                <h4 class="title">
+                                    <i class="pe-7s-clock text-muted pull-right"></i>
+                                    Recent Activity
+                                </h4>
                                 <p class="category"></p>
                             </div>
                             <div class="content">
-                                <div>
-                                    <p></p>
+                            <% // if (activity[0]) { %>
+                                <div class="text-muted">
+                                    No recent activity.
                                 </div>
                             </div>
                         </div>
-                    <% // }; %>
+                            <% // }; %>
                     </div>
         		</div>
             </div>

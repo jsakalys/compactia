@@ -4,12 +4,14 @@
             <div class="col-sm-8">
                 <div id="characterInfo" class="card">
                     <div class="header">
-                        <h4 class="title">Character Details
-                        <% if (character.userId == currentUser.id) { %>
-                            <button class="btn btn-simple edit">
-                        		<small><i class="pe-7s-note"></i> Edit</small>
-                        	</button>
-                        <% }; %>
+                        <h4 class="title">
+                            Character Details 
+                            <i class="pe-7s-id text-muted pull-right"></i>
+                            <% if (character.userId == currentUser.id) { %>
+                                <button class="btn btn-simple edit">
+                            		<small><i class="pe-7s-note"></i> Edit</small>
+                            	</button>
+                            <% }; %>
                         </h4>
                     </div>
                     <div class="content">
@@ -93,11 +95,21 @@
             <div class="col-sm-4">
                 <div class="card card-user">
                     <div class="image">
-                        <img src="<%= characterImages.environment %>" alt="Environment for <%= character.name %>"/>   
+                        <% if (characterImages.environment) { %>
+                            <img src="<%= characterImages.environment %>" alt="Environment for <%= character.name %>"/>  
+                        <% } else { %>
+                            <img src="/img/default_environment.png" alt="Default environment for <%= character.name %>"/>
+                        <% }; %>
                     </div>
                     <div class="content">
                         <div class="author">
-                            <img class="avatar border-gray" src="<%= characterImages.profile %>" alt="Profile for <%= character.name %>"/>
+                            <% if (characterImages.profile) { %>
+                                <img class="avatar border-gray" src="<%= characterImages.profile %>" alt="Profile for <%= character.name %>"/>
+                            <% } else if (attribute.gender.toLowerCase() == 'female') { %>
+                                <img class="avatar border-gray" src="/img/default_female_avatar.png" alt="Default profile for <%= character.name %>"/>
+                            <% } else { %>
+                                <img class="avatar border-gray" src="/img/default_male_avatar.png" alt="Default profile for <%= character.name %>"/>
+                            <% }; %>
                             <h4 class="title"><%= character.name %>
                                 <br>
                                 <small>
@@ -157,7 +169,9 @@
             <% if (campaign) { %>
                 <div id="characterCampaign" class="card">
                     <div class="header">
-                        <h4 class="title">Character Campaign
+                        <h4 class="title">
+                            Character Campaign
+                            <i class="pe-7s-notebook text-muted pull-right"></i>
                          <% if (character.userId == currentUser.id) { %>
                             <button class="btn btn-simple edit">
                                 <small><i class="pe-7s-note"></i> Edit</small>
@@ -186,7 +200,9 @@
                 <% } else { %>
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Add <%= character.name %> to a Campaign<br />
+                        <h4 class="title">
+                            Join a Campaign
+                            <i class="pe-7s-add-user text-muted pull-right"></i>
                         </h4>
                     </div>
                     <div class="content">
@@ -218,7 +234,10 @@
                 <% if (character.userId == currentUser.id) { %>
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Character Graphics</h4>
+                        <h4 class="title">
+                            Character Graphics 
+                            <i class="pe-7s-paint-bucket text-muted pull-right"></i>
+                        </h4>
                     </div>
                     <div class="content">
                         <div class="form-group">
