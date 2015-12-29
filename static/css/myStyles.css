@@ -75,3 +75,26 @@ p {
     margin-left: 15px;
     font-size: 12px;
 }
+
+.navbar-collapse {
+    max-height: none;
+}
+#bodyClick {
+    cursor: pointer;
+}
+
+footer {
+    background-color: white;
+    padding-left: 15px;
+    font-size: 12px;
+}
+
+footer a {
+    font-size: 12px;
+}
+.logo {
+    margin: 5px 0px;
+}
+.footer .copyright {
+    font-size: 12px;
+}
