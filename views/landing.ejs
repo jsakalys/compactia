@@ -3,13 +3,16 @@
     <div class="col-sm-10 col-sm-offset-1">
     <div class="row">
         <% if (!currentUser) { %>
-        <a class="btn big-login pull-right" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Log In</a>
+        <a class="btn btn-info btn-fill big-login pull-right" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Log In</a>
         <h5 class="pull-right text-muted">
             Already have an account?
         </h5>
         <% }; %>
         <% if (currentUser) { %>
-        <a class="btn btn-info big-login pull-right" data-toggle="modal" href="/logout">Log Out</a>
+        <span class="text-muted current-user">
+            <i class="pe-7s-lock"></i> Logged in as <%= currentUser.name %>
+        </span>
+        <a class="btn btn-info btn-fill big-login pull-right" data-toggle="modal" href="/logout">Log Out</a>
         <% }; %>
     </div>
     <div class="row">
@@ -28,7 +31,7 @@
             </h2>
             <p>Sign up and start exploring some of its amazing features.</p>
             <p>
-                <a class="btn btn-info big-register" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a>
+                <a class="btn btn-info btn-fill big-register" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a>
             </p>
         </div>
     </div>
@@ -166,25 +169,10 @@
             <h4>
                 Compactia is actively being developed by <a href="http://www.juliesakalys.com">Julie Sakalys</a>. If you like it, tell your friends. Better yet, tell your GM. Looking for a certain functionality? <a href="mailto:hello@juliesakalys.com">Email me</a> a feature request. Alternatively, you can <a href="http://github.com/jsakalys/compactia">view the source code</a> on GitHub.
             </h4>
-            <p class="pull-right text-muted">
-                <small>
-                    Copyright &copy; 2015 <a href="http://juliesakalys.com">Julie Sakalys</a>
-                </small>
-                <br>
-                <a href="http://github.com/jsakalys">
-                    <i class="fa fa-github-square pull-right"></i>
-                </a>
-                <a href="http://linkedin.com/in/jsakalys">
-                    <i class="fa fa-linkedin-square pull-right"></i>
-                </a>
-                <a href="http://twitter.com/juliesakalys">
-                    <i class="fa fa-twitter-square pull-right"></i>
-                </a>
-                <a href="mailto:hello@juliesakalys.com">
-                    <i class="fa fa-envelope-o pull-right"></i>
-                </a>
-            </p>
         </div>
+        <div style="height: 60px"></div>
+        <% include ../views/layouts/partials/footer %>
+        <div style="height: 60px"></div>
     </div>
 	<div class="modal fade login" id="loginModal">
 	    <div class="modal-dialog login animated">
@@ -196,13 +184,11 @@
                 <div class="modal-body">
                     <div class="box">
                          <div class="content">
-                            <div class="social pull-left">
-                                <a id="facebook_login" class="circle facebook" href="/passport/facebook">
+                            <div class="text-center">
+                                <a class="btn btn-info btn-fill btn-login" href="/passport/facebook">
                                     <i class="fa fa-facebook fa-fw"></i>
+                                    Login with Facebook
                                 </a>
-                                <p class="pull-right" style="margin-top: 15px">
-                                    Log in with Facebook
-                                </p>
                             </div>
                             <div class="division">
                                 <div class="line l"></div>
@@ -214,7 +200,7 @@
                                 <form method="POST" action="/login" class="login-form" accept-charset="UTF-8">
                                 	<input id="email" class="form-control" type="text" placeholder="Email" name="email" required>
                                 	<input id="password" class="form-control" type="password" placeholder="Password" name="password" required>
-                                	<input class="btn btn-default btn-login" type="submit" value="Login">
+                                	<input class="btn btn-info btn-fill btn-login" type="submit" value="Login">
                                 </form>
                             </div>
                          </div>
@@ -231,7 +217,7 @@
                                     <input id="password" minlength="8" class="form-control" type="password" placeholder="Enter a password" name="password" required>
                                     <label for="name" class="hidden">Re-enter Password</label>
                                     <input id="password2" minlength-"8" class="form-control" type="password" placeholder="Re-enter password" name="password2" required>
-                                    <input class="btn btn-default btn-register" type="submit" value="Create account" name="commit">
+                                    <input class="btn btn-info btn-fill btn-register" type="submit" value="Create account" name="commit">
                                 </form>
                             </div>
                         </div>

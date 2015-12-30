@@ -18,9 +18,9 @@
     <!-- Animation library for notifications -->
     <link href="/css/animate.min.css" rel="stylesheet" />
     <!-- Creative Tim CSS -->
-    <% var cssFile = cssFile || null; %>
-    <% if (cssFile) { %>
-    <link href="/css/<%= cssFile %>.css" rel="stylesheet" />
+    <% var wizard = wizard || null; %>
+    <% if (wizard) { %>
+    <link href="/css/gsdk-base.css" rel="stylesheet" />
     <% }; %>
     <link href="/css/light-bootstrap-dashboard.css" rel="stylesheet" />
     <!-- Custom CSS -->
@@ -34,12 +34,6 @@
         }
         .userPic {
             margin-top: 20px;
-        }
-        .navbar-collapse {
-            max-height: none;
-        }
-        #bodyClick {
-            cursor: pointer;
         }
     </style>
 </head>
@@ -62,11 +56,12 @@
     <!-- My JS -->
     <script src="/js/myScript.js"></script>
     <!-- Creative Tim JS -->
+    <% var wizard = wizard || null; %>
+    <% if (wizard) { %>
     <script src="/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>
     <script src="/js/wizard.js"></script>
+    <% }; %>
     <script src="/js/light-bootstrap-dashboard.js"></script>
-    <!-- Charts Plugin -->
-    <!-- <script src="/js/chartist.min.js"></script> -->
     <!-- Notifications Plugin -->
     <script src="/bootstrap3/js/bootstrap-notify.js"></script>
     <!-- Google Maps Plugin -->

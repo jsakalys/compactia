@@ -1,8 +1,18 @@
+* {
+    outline: none;
+}
 p {
     text-align: justify;
 }
-* {
-    outline: none;
+footer {
+    clear: both;
+    background-color: white;
+    padding: 0px 15px;
+    font-size: 12px;
+    border-top: 1px solid #e7e7e7;
+}
+footer a {
+    font-size: 12px;
 }
 .dropdown-menu .divider {
     margin: 0px 5px;
@@ -63,38 +73,73 @@ p {
 }
 .big-register {
     margin-top: 20px;
+    text-transform: none;
 }
 .big-login {
     margin-left: 20px;
+    text-transform: none;
 }
-
 .card {
     box-shadow: none;
 }
-.current-user {
-    margin-left: 15px;
-    font-size: 12px;
+.card-user .avatar {
+    border: solid 4px;
 }
-
+.card-user .avatar.border-gray:hover {
+    border-color: #777;
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
+}
+.dropdown-menu > li > a {
+    color: #9A9A9A;
+}
+.dropdown-menu > li > a:hover {
+    color: #777;
+}
+.dropdown-menu .divider {
+    margin: 0px;
+}
+.current-user {
+    font-size: 12px;
+    margin-left: 15px;
+}
 .navbar-collapse {
     max-height: none;
-}
-#bodyClick {
-    cursor: pointer;
-}
-
-footer {
-    background-color: white;
-    padding-left: 15px;
-    font-size: 12px;
-}
-
-footer a {
-    font-size: 12px;
 }
 .logo {
     margin: 5px 0px;
 }
 .footer .copyright {
     font-size: 12px;
+    padding-right: 0px;
+    margin-right: 0px;
+}
+.copyright i {
+    margin-top: 4px;
+}
+.navbar {
+    font-size: 14px;
+}
+.login .btn-login, .registerBox .btn-register{
+    text-transform: none;
+    margin-bottom: 30px;
+}
+.wizard-card .btn {
+    text-transform: none;
+    font-size: 14px;
+}
+.picture-container h6 {
+    margin-bottom: 15px;
+}
+#bodyClick {
+    cursor: pointer;
+}
+#copyright {
+    float: right;
+}
+@media (max-width: 991px) {
+    #copyright {
+        float: left;
+    }
 }

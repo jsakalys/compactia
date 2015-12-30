@@ -1,34 +1,46 @@
 <footer class="footer">
-    <div class="container-fluid">
-        <nav class="pull-left">
-            <ul>
-                <li>
-                    <a href="/create">
-                        Home
-                    </a>
-                </li>
-                <li>
-                    <a href="/characters/list">
-                        My Characters
-                    </a>
-                </li>
-                <li>
-                    <a href="/campaigns/list">
-                        My Campaigns
-                    </a>
-                </li>
-                <li>
-                    <a href="/account">
-                       My Account
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <div>
-        <p class="copyright pull-right">
-            &copy; 2015 <a href="/">Compactia</a>, by <a href="http://www.juliesakalys.com">Julie Sakalys</a>
+    <% if (currentUser) { %>
+    <nav class="pull-left">
+        <ul>
+            <li>
+                <a href="/create">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="/characters/list">
+                    My Characters
+                </a>
+            </li>
+            <li>
+                <a href="/campaigns/list">
+                    My Campaigns
+                </a>
+            </li>
+            <li>
+                <a href="/account">
+                   My Account
+                </a>
+            </li>
+        </ul>
+    </nav>  
+    <% }; %>
+    <div id="copyright">
+        <p class="copyright">
+            Copyright &copy; 2015 by <a href="http://www.juliesakalys.com">Julie Sakalys</a>
+        <a href="http://github.com/jsakalys">
+            <i class="fa fa-github-square pull-right"></i>
+        </a>
+        <a href="http://linkedin.com/in/jsakalys">
+            <i class="fa fa-linkedin-square pull-right"></i>
+        </a>
+        <a href="http://twitter.com/juliesakalys">
+            <i class="fa fa-twitter-square pull-right"></i>
+        </a>
+        <a href="mailto:hello@juliesakalys.com">
+            <i class="fa fa-envelope-o pull-right" style="margin-left: 15px"></i>
+        </a>
         </p>
-        <div class="clearfix"></div>
-        </div>
     </div>
+    <div class="clearfix"></div>
 </footer>

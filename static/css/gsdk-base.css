@@ -238,10 +238,10 @@ h1 .subtitle{
     background-color: #3472F7;
     border-color: #3472F7;
 }
-.btn-info.btn-fill{
+/*.btn-info.btn-fill{
     background-color: #2CA8FF;
     border-color: #2CA8FF;
-}
+}*/
 .btn-success.btn-fill{
     background-color: #05AE0E;
     border-color: #05AE0E;
@@ -262,10 +262,10 @@ h1 .subtitle{
     border-color: #1D62F0;
     background-color: #1D62F0;
 }
-.btn-info.btn-fill:hover, .btn-info.btn-fill:focus, .btn-info.btn-fill:active, .btn-info.btn-fill.active, .open .dropdown-toggle.btn-info.btn-fill {
+/*.btn-info.btn-fill:hover, .btn-info.btn-fill:focus, .btn-info.btn-fill:active, .btn-info.btn-fill.active, .open .dropdown-toggle.btn-info.btn-fill {
     background-color: #109CFF;
     border-color: #109CFF;
-}
+}*/
 .btn-success.btn-fill:hover, .btn-success.btn-fill:focus, .btn-success.btn-fill:active, .btn-success.btn-fill.active, .open .dropdown-toggle.btn-fill.btn-success {
     background-color: #049F0C;
     border-color: #049F0C;
@@ -758,7 +758,7 @@ label{
     border-color: #05ae0e;
 }
 .wizard-card.ct-wizard-blue .picture:hover{
-    border-color: #3472f7;
+    border-color: #1DC7EA;
 }
 .wizard-card.ct-wizard-orange .picture:hover{
     border-color: #ff9500;
@@ -815,7 +815,7 @@ label{
     background-color: #2CA8FF;
 }
 .wizard-card.ct-wizard-blue .nav-pills > li.active a{
-    background-color: #3472f7;
+    background-color: #1DC7EA;
 }
 .wizard-card.ct-wizard-orange .nav-pills > li.active a{
     background-color: #ff9500;
@@ -874,7 +874,7 @@ label{
     border-color: #2CA8FF;
 }
 .wizard-card.ct-wizard-blue .choice:hover .icon, .wizard-card.ct-wizard-blue .choice.active .icon{
-    border-color: #3472f7;
+    border-color: #1DC7EA;
 }
 .wizard-card.ct-wizard-green .choice:hover .icon, .wizard-card.ct-wizard-green .choice.active .icon{
     border-color: #05ae0e;
@@ -902,6 +902,7 @@ label{
 }
 
 
+/*
 .footer{
     position: relative;
     bottom: 20px;
@@ -919,6 +920,7 @@ label{
 .footer .heart{
     color: #FF3B30;
 }
+*/
 
 @media (max-width:768px){
     .main .container{
