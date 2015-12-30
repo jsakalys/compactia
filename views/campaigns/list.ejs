@@ -6,11 +6,19 @@
 				<div class="card card-user">
 				    <a href="/campaign/<%= campaign.identifier %>">
 				        <div class="image">
-				            <img src="<%= campaignImages[campaign.id].banner %>" alt="Banner for <%= campaign.name %>"/>   
+				        	<% if (campaignImages[campaign.id].banner) { %>
+				            <img src="<%= campaignImages[campaign.id].banner %>" alt="Banner for <%= campaign.name %>"/>
+				            <% } else { %>
+				            <img src="/img/default_banner.png" alt="Default banner for <%= campaign.name %>"/>
+				            <% }; %>
 				        </div>
 				        <div class="insignia pull-left">
 				            <a href="/campaign/<%= campaign.identifier %>">
+				            <% if (campaignImages[campaign.id].insignia) { %>
 				                <img class="avatar border-gray" src="<%= campaignImages[campaign.id].insignia %>" alt="Insignia for <%= campaign.name %>"/>
+				            <% } else { %>
+				            	<img class="avatar border-gray" src="/img/default_insignia.png" alt="Default insignia for <%= campaign.name %>"/>
+				            <% }; %>
 				            </a>
 				        </div>
 				        <div class="campaign">

@@ -132,6 +132,9 @@ footer a {
 .picture-container h6 {
     margin-bottom: 15px;
 }
+p.category {
+    text-transform: capitalize;
+}
 #bodyClick {
     cursor: pointer;
 }
