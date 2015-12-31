@@ -130,18 +130,23 @@ router.get('/join/:identifier', function(req,res){
 	// only show if user is logged in
 	if (req.user) {
 		db.campaign.findOne({where: {identifier: req.params.identifier}}).then(function(campaign){
-			campaign.getUsers().then(function(users){
-				// users.forEach(function(user){
-				// 	// show campaign home if user is already in that campaign
-				// 	if (user.id == req.user.id) {
-				// 		res.redirect('/campaign/' + campaign.identifier);
-				// 	};
-				// });
-				res.render('campaign/join', {
-					layout: 'layouts/account-view',
-					campaign: campaign
+			if (campaign) {
+				campaign.getUsers().then(function(users){
+					// users.forEach(function(user){
+					// 	// show campaign home if user is already in that campaign
+					// 	if (user.id == req.user.id) {
+					// 		res.redirect('/campaign/' + campaign.identifier);
+					// 	};
+					// });
+					res.render('campaign/join', {
+						layout: 'layouts/account-view',
+						campaign: campaign
+					});
 				});
-			});
+			} else {
+				req.flash('Sorry, no such campaign exists.');
+				res.redirect('/');
+			};
 		});
 	} else {
 		res.send('Access denied: you are not logged in.')
@@ -154,18 +159,23 @@ router.post('/join/:identifier', function(req,res){
 	if (req.user) {
 		// Search for campaign and add user to it if password matches
 		db.campaign.findOne({where: {identifier: req.params.identifier}}).then(function(campaign){
-			// check if user entered the correct campaign password
-			bcrypt.compare(req.body.password, campaign.password, function(err, result) {
-    			if (result) {
-					db.user.findOne({where: {id: req.user.id}}).then(function(user){
-						campaign.addUser(user).then(function(){
-							res.redirect('/campaign/'+req.params.identifier);
+			if (campaign) {
+				// check if user entered the correct campaign password
+				bcrypt.compare(req.body.password, campaign.password, function(err, result) {
+	    			if (result) {
+						db.user.findOne({where: {id: req.user.id}}).then(function(user){
+							campaign.addUser(user).then(function(){
+								res.redirect('/campaign/'+req.params.identifier);
+							});
 						});
-					});
-    			} else {
-    				res.redirect('/campaign/join/'+req.params.identifier);
-    			};
-			});
+	    			} else {
+	    				res.redirect('/campaign/join/'+req.params.identifier);
+	    			};
+				});
+			} else {
+				req.flash('Sorry, no such campaign exists.');
+				res.redirect('/');
+			};
 		});
 	} else {
 		res.send('Access denied: you are not logged in.')
@@ -178,11 +188,15 @@ router.put('/character/add', function(req,res){
 	if (req.user) {
 		// find campaign and associate character with it
 			db.campaign.find({where: {identifier: req.body.identifier,}}).then(function(campaign){
-				db.character.find({where: {id: parseInt(req.body.characterId)}}).then(function(character) {
-					campaign.addCharacter(character);
-					res.sendStatus(200);
-					// don't need anything else here, cause ajax
-				});
+				if (campaign) {
+					db.character.find({where: {id: parseInt(req.body.characterId)}}).then(function(character) {
+						campaign.addCharacter(character);
+						res.sendStatus(200);
+						// don't need anything else here, cause ajax
+					});
+				} else {
+					res.sendStatus(400);
+				};
 			});
 	} else {
 		res.send('Access denied: you are not logged in.');

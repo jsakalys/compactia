@@ -54,6 +54,7 @@ router.get('/list', function(req,res){
 						characterImages[character.id].environment = cloudinary.url(character.environment, {width: 2600, height: 800, crop: "fill", gravity: "center"});
 						characterImages[character.id].profile = cloudinary.url(character.profile, {width: 256, height: 256, crop: "fill", gravity: "face"});
 					});
+					console.log(characters)
 					res.render('characters/list', {
 						layout: 'layouts/account-view',
 						characters: characters,

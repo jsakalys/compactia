@@ -1,7 +1,16 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-            <% characters.forEach(function(character){ %>
+        <% characters.forEach(function(character){ %>
+            <% if (character.attribute == null) { %>
+                <% character.attribute = {
+                    race: ' ',
+                    class: ' ',
+                    birthplace: ' ',
+                    hp: '0',
+                    def: '0',
+                    }; %>
+            <% } %>
             <div class="col-sm-4">
                 <div class="card card-user">
                     <div class="image">
@@ -16,7 +25,7 @@
                             <div class="author">
                             <% if (characterImages[character.id].profile) { %>
                                 <img class="avatar border-gray" src="<%= characterImages[character.id].profile %>" alt="Profile for <%= character.name %>"/>
-                            <% } else if (character.attribute['gender'].toLowerCase() == 'female') { %>
+                            <% // } else if (character.attribute['gender'] && character.attribute['gender'].toLowerCase() == 'female') { %>
                                 <img class="avatar border-gray" src="/img/default_female_avatar.png" alt="Default profile for <%= character.name %>"/>
                             <% } else { %>
                                 <img class="avatar border-gray" src="/img/default_male_avatar.png" alt="Default profile for <%= character.name %>"/>
@@ -24,11 +33,21 @@
                                 <h4 class="title"><%= character.name %>
                                     <br>
                                     <small>
-                                        <%= character.attribute['race'] %> <%= character.attribute['class'] %>
+                                    <% if (character.attribute['race']) { %>
+                                        <%= character.attribute['race'] %> 
+                                    <% }; %>
+                                        <% if (character.attribute['class']) { %>
+                                        <%= character.attribute['class'] %>
+                                    <% }; %>
                                     </small>
                                 </h4>
-                                <button class="btn btn-simple" style="margin-top: 5px"><i class="pe-7s-<%= character.attribute['gender'].toLowerCase() %>"></i>
+                                <% if (character.attribute['gender'] && character.attribute['gender'].toLowerCase == 'female') { %>
+                                <button class="btn btn-simple" style="margin-top: 5px"><i class="pe-7s-female"></i>
                                 </button>
+                                <% } else { %>
+                                <button class="btn btn-simple" style="margin-top: 5px"><i class="pe-7s-male"></i>
+                                </button>
+                                <% }; %>
                             </div>
                         </a>
                         <div class="col-sm-8 col-sm-offset-2">
@@ -42,7 +61,9 @@
                                             <label>Health</label>
                                         </td>
                                         <td style="text-align: center; width: 30px">
+                                        <% if (character.attribute['hp']) { %>
                                             <label><%= character.attribute['hp'] %></label>
+                                        <% }; %>
                                         </td>
                                     </tr>
                                     <tr>
@@ -53,7 +74,9 @@
                                             <label>Defense</label>
                                         </td>
                                         <td style="text-align: center">
+                                        <% if (character.attribute['def']) { %>
                                             <label><%= character.attribute['def'] %></label>
+                                        <% }; %>
                                         </td>
                                     </tr>
                                 </table>
@@ -64,7 +87,9 @@
                     <div class="row">
                         <div class="col-xs-4 text-left">
                             <button class="btn btn-simple">
+                                <% if (character.exp) { %>
                                 <i class="pe-7s-medal"></i> <label><%= character.exp %></label>
+                                <% }; %>
                             </button>
                         </div>
                         <div class="col-xs-4 text-center">
@@ -74,13 +99,15 @@
                         </div>
                         <div class="col-xs-4 text-right">
                             <button class="btn btn-simple">
+                             <% if (character.gold) { %>
                                 <i class="pe-7s-diamond"></i> <label><%= character.gold %></label>
+                            <% }; %>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <% }); %>  
+        <% }); %>  
         </div>                       
     </div> 
 </div>

@@ -84,7 +84,9 @@ $(document).ready(function(){
             data:myData
         }).success(function(){
             window.location.reload();
-        });
+        }).error(function(){
+            alert("An error occurred. Please check your credentials.")
+        })
     });
 
     $('.delete-form').on('submit', function(e){
