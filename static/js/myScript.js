@@ -81,12 +81,14 @@ $(document).ready(function(){
         $.ajax({
             method:'PUT',
             url:myUrl,
-            data:myData
-        }).success(function(){
-            window.location.reload();
-        }).error(function(){
-            alert("An error occurred. Please check your credentials.")
-        })
+            data:myData,
+            success: function(){
+                window.location.reload();
+            },
+            error: function(){
+                alert("An error occurred. Please check your credentials.");
+            }
+        });
     });
 
     $('.delete-form').on('submit', function(e){
@@ -96,12 +98,14 @@ $(document).ready(function(){
         $.ajax({
             method:'DELETE',
             url:myUrl,
-            data:myData
-        }).success(function(){
-            location.replace("/create");
-        }).error(function(){
-            alert("You must confirm deletion by typing 'DELETE' into the form.")
-        })
+            data:myData,
+            success: function(){
+                location.replace("/create");
+            },
+            error: function(){
+                alert("You must confirm deletion by typing 'DELETE' into the form.")
+            }
+        });
     });
 
     $("#signupForm").validate();

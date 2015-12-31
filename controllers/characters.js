@@ -191,25 +191,29 @@ router.put('/:id', function(req,res){
 	if (req.user) {
 		// find character of param name belonging to current user
 		db.character.find({where: {id: req.params.id}}).then(function(character){
-			character.updateAttributes({
-	    		name: req.body.name,
-	    		exp: parseInt(req.body.exp),
-	    		gold: parseInt(req.body.gold)
-		    }).then(function(character){
-		    	db.attribute.find({where: {characterId: character.id}}).then(function(attribute){
-		    		attribute.updateAttributes({
-	    				race: req.body.race,
-			    		gender: req.body.gender,
-			    		birthplace: req.body.birthplace,
-			    		class: req.body.class,
-			    		hp: parseInt(req.body.hp),
-			    		def: parseInt(req.body.def),
-			    		desc: req.body.desc,
-		    		}).then(function(){
-			  			// don't need anything here, cause ajax
-		    		});
-		    	});
-			});
+			if (character) {
+				character.updateAttributes({
+		    		name: req.body.name,
+		    		exp: parseInt(req.body.exp),
+		    		gold: parseInt(req.body.gold)
+			    }).then(function(character){
+			    	db.attribute.find({where: {characterId: character.id}}).then(function(attribute){
+			    		attribute.updateAttributes({
+		    				race: req.body.race,
+				    		gender: req.body.gender,
+				    		birthplace: req.body.birthplace,
+				    		class: req.body.class,
+				    		hp: parseInt(req.body.hp),
+				    		def: parseInt(req.body.def),
+				    		desc: req.body.desc,
+			    		}).then(function(){
+				  			res.sendStatus(200);
+			    		});
+			    	});
+				});
+			} else {
+				res.sendStatus(400);
+			};
 		});
 	} else {
 		res.send('Access denied: you are not logged in.');
@@ -231,7 +235,7 @@ router.delete('/:id', function(req,res){
 			});
     	} else {
     		res.sendStatus(400);
-    	}
+    	};
 	} else {
 		res.send('Access denied: you are not logged in.');
 	};

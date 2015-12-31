@@ -61,7 +61,7 @@
                                             <label>Health</label>
                                         </td>
                                         <td style="text-align: center; width: 30px">
-                                        <% if (character.attribute['hp']) { %>
+                                        <% if (character.attribute['hp'] !== null) { %>
                                             <label><%= character.attribute['hp'] %></label>
                                         <% }; %>
                                         </td>
@@ -74,7 +74,7 @@
                                             <label>Defense</label>
                                         </td>
                                         <td style="text-align: center">
-                                        <% if (character.attribute['def']) { %>
+                                        <% if (character.attribute['def'] !== null) { %>
                                             <label><%= character.attribute['def'] %></label>
                                         <% }; %>
                                         </td>
@@ -87,7 +87,7 @@
                     <div class="row">
                         <div class="col-xs-4 text-left">
                             <button class="btn btn-simple">
-                                <% if (character.exp) { %>
+                                <% if (character.exp !== null) { %>
                                 <i class="pe-7s-medal"></i> <label><%= character.exp %></label>
                                 <% }; %>
                             </button>
@@ -99,7 +99,7 @@
                         </div>
                         <div class="col-xs-4 text-right">
                             <button class="btn btn-simple">
-                             <% if (character.gold) { %>
+                             <% if (character.gold !== null) { %>
                                 <i class="pe-7s-diamond"></i> <label><%= character.gold %></label>
                             <% }; %>
                             </button>
