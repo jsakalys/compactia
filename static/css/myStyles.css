@@ -86,7 +86,7 @@ footer a {
     border: solid 4px;
 }
 .card-user .avatar.border-gray:hover {
-    border-color: #777;
+    border-color: #9A9A9A;
     -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
@@ -130,7 +130,7 @@ footer a {
     font-size: 14px;
 }
 .picture-container h6 {
-    margin-bottom: 15px;
+    margin-top: 15px;
 }
 p.category {
     text-transform: capitalize;

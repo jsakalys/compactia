@@ -12,7 +12,28 @@ var upload = multer({ dest: './uploads/' });
 // Require cloudinary
 var cloudinary = require('cloudinary');
 
-/* Routers */
+/* Routes */
+
+// Lists all characters in database
+router.get('/all', function(req,res){
+	if (req.user) {
+		db.character.findAll().then(function(characters){
+			var characterImages = {};
+			characters.forEach(function(character){
+				characterImages[character.id] = {};
+				characterImages[character.id].environment = cloudinary.url(character.environment, {width: 2600, height: 800, crop: "fill", gravity: "center"});
+				characterImages[character.id].profile = cloudinary.url(character.profile, {width: 256, height: 256, crop: "fill", gravity: "face"});
+			});
+			res.render('characters/list', {
+				layout: 'layouts/account-view',
+				characters: characters,
+				characterImages: characterImages
+			});
+		});
+	} else {
+		res.send('Access denied: you are not logged in.')
+	};
+});
 
 // Shows a list of characters belonging to the current user
 router.get('/list', function(req,res){
@@ -189,6 +210,27 @@ router.put('/:id', function(req,res){
 		    	});
 			});
 		});
+	} else {
+		res.send('Access denied: you are not logged in.');
+	};
+});
+
+// Deletes a character from the database
+router.delete('/:id', function(req,res){
+	// only allow access priviliges if user is logged in
+	if (req.user) {
+		if (req.body.confirmation.toLowerCase() === 'delete') {
+			// find character of param name belonging to current user
+			db.character.find({where: {id: req.params.id}}).then(function(character){
+				if (character.userId === req.user.id) {
+	    			character.destroy();
+	    		};
+		    }).then(function(){
+		    	res.sendStatus(200);
+			});
+    	} else {
+    		res.sendStatus(400);
+    	}
 	} else {
 		res.send('Access denied: you are not logged in.');
 	};

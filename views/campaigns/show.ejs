@@ -4,32 +4,35 @@
       		<div class="col-sm-12">
                 <div class="row">
                     <div class="card card-user">
-                        <a href="/campaign/<%= campaign.identifier %>">
-                            <div class="image">
-                                <% if (campaignImages.banner) { %>
-                                    <img src="<%= campaignImages.banner %>" alt="Banner for <%= campaign.name %>"/>
-                                <% } else { %>
-                                    <img src="/img/default_banner.png" alt="Default banner for <%= campaign.name %>"/>
-                                <% }; %>
-                            </div>
-                            <div class="insignia pull-left">
-                                <% if (campaignImages.insignia) { %>
-                                    <img class="avatar border-gray" src="<%= campaignImages.insignia %>" alt="Insignia for <%= campaign.name %>"/>
-                                <% } else { %>
-                                    <img class="avatar border-gray" src="/img/default_insignia.png" alt="Default insignia for <%= campaign.name %>"/>
-                                <% }; %>
-                            </div>
-                            <div class="campaign">
-                                <h4 class="campaign-title"><%= campaign.name %>
-                                    <small> <%= campaign.status %></small>
-                                </h4>
-                            </div>
-                            <div class="campaign pull-right">
-                                <button id="campaignLink" class="btn btn-simple campaign-title" data-toggle="popover" title="Permanent Link" data-content="<textarea>http://compactia.com/campaign/<%= campaign.identifier %></textarea>" data-placement="left" data-html="true">
-                                    <small><i class="pe-7s-link"></i> Link</small>
-                                </button>
-                            </div>
-                        </a>
+                        <div class="image">
+                            <a href="/campaign/<%= campaign.identifier %>">
+                            <% if (campaignImages.banner) { %>
+                                <img src="<%= campaignImages.banner %>" alt="Banner for <%= campaign.name %>"/>
+                            <% } else { %>
+                                <img src="/img/default_banner.png" alt="Default banner for <%= campaign.name %>"/>
+                            <% }; %>
+                            </a>
+                        </div>
+                        <div class="insignia pull-left">
+                            <a href="/campaign/<%= campaign.identifier %>">
+                            <% if (campaignImages.insignia) { %>
+                                <img class="avatar border-gray" src="<%= campaignImages.insignia %>" alt="Insignia for <%= campaign.name %>"/>
+                            <% } else { %>
+                                <img class="avatar border-gray" src="/img/default_insignia.png" alt="Default insignia for <%= campaign.name %>"/>
+                            <% }; %>
+                            </a>
+                        </div>
+                        <div class="campaign">
+                            <h4 class="campaign-title">
+                                <%= campaign.name %>
+                                <small> <%= campaign.status %></small>
+                            </h4>
+                        </div>
+                        <div class="campaign pull-right">
+                            <button id="campaignLink" class="btn btn-simple campaign-title" data-toggle="popover" title="Permanent Link" data-content="<textarea>http://compactia.com/campaign/<%= campaign.identifier %></textarea>" data-placement="left" data-html="true">
+                                <small><i class="pe-7s-link"></i> Link</small>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -161,6 +164,7 @@
                     </div>
                 </div>
             </div>
+            <% if (campaign.ownerId == currentUser.id) { %>
             <div class="row">
                 <div class="card">
                     <div class="header">
@@ -194,6 +198,27 @@
                         </div>
                     </div>
                 </div>
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">
+                            Delete Campaign 
+                            <i class="pe-7s-trash text-muted pull-right"></i>
+                        </h4>
+                    </div>
+                    <div class="content">
+                        <form id="deleteCampaign" action="" class="delete-form">
+                            <div class="form-group">
+                                <label>Warning: This action cannot be undone.</label>
+                                <input type="text" class="form-control" name="confirmation" placeholder="Type 'DELETE' to confirm campaign deletion.">
+                                <!-- Hidden ID to identify correct character in DB -->
+                                <input type="hidden" class="form-control hidden" name="campaignId" value="<%= campaign.id %>">
+                            </div>
+                            <input type="submit" class="btn btn-danger btn-fill pull-right save saveChanges" value="Delete Campaign">
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+                <% }; %>
             </div>
         </div>
     </div>

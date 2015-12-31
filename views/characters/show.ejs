@@ -166,7 +166,7 @@
                         </div>
                     </div>
                 </div>
-            <% if (campaign) { %>
+                <% if (campaign) { %>
                 <div id="characterCampaign" class="card">
                     <div class="header">
                         <h4 class="title">
@@ -262,6 +262,26 @@
                                 </div>
                             </form>
                         </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">
+                            Delete Character 
+                            <i class="pe-7s-delete-user text-muted pull-right"></i>
+                        </h4>
+                    </div>
+                    <div class="content">
+                        <form id="deleteCharacter" action="" class="delete-form">
+                            <div class="form-group">
+                                <label>Warning: This action cannot be undone.</label>
+                                <input type="text" class="form-control" name="confirmation" placeholder="Type 'DELETE' to confirm character deletion.">
+                                <!-- Hidden ID to identify correct character in DB -->
+                                <input type="hidden" class="form-control hidden" name="characterId" value="<%= character.id %>">
+                            </div>
+                            <input type="submit" class="btn btn-danger btn-fill pull-right save saveChanges" value="Delete Character">
+                            <div class="clearfix"></div>
+                        </form>
                     </div>
                 </div>
                 <% }; %>

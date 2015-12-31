@@ -87,6 +87,21 @@ $(document).ready(function(){
         });
     });
 
+    $('.delete-form').on('submit', function(e){
+        e.preventDefault();
+        var myUrl = $(this).attr('action');
+        var myData = $(this).serialize()
+        $.ajax({
+            method:'DELETE',
+            url:myUrl,
+            data:myData
+        }).success(function(){
+            location.replace("/create");
+        }).error(function(){
+            alert("You must confirm deletion by typing 'DELETE' into the form.")
+        })
+    });
+
     $("#signupForm").validate();
 
 });

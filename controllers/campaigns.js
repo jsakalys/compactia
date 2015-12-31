@@ -12,7 +12,7 @@ var upload = multer({ dest: './uploads/' });
 // Require cloudinary
 var cloudinary = require('cloudinary');
 
-/* Routers */
+/* Routes */
 
 // Lists all campaigns in database
 router.get('/all', function(req,res){
@@ -205,6 +205,27 @@ router.put('/:identifier', function(req,res){
 		  		return false;
 		  	};
 		});
+	} else {
+		res.send('Access denied: you are not logged in.');
+	};
+});
+
+// Deletes a campaign from the database
+router.delete('/:identifier', function(req,res){
+	// only allow access priviliges if user is logged in
+	if (req.user) {
+		if (req.body.confirmation.toLowerCase() === 'delete') {
+			// find campaign of param name belonging to current user
+			db.campaign.find({where: {id: req.body.campaignId}}).then(function(campaign){
+				if (campaign.ownerId === req.user.id) {
+	    			campaign.destroy();
+	    		};
+		    }).then(function(){
+		    	res.sendStatus(200);
+			});
+    	} else {
+    		res.sendStatus(400);
+    	}
 	} else {
 		res.send('Access denied: you are not logged in.');
 	};
