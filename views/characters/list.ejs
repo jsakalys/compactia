@@ -25,7 +25,7 @@
                             <div class="author">
                             <% if (characterImages[character.id].profile) { %>
                                 <img class="avatar border-gray" src="<%= characterImages[character.id].profile %>" alt="Profile for <%= character.name %>"/>
-                            <% // } else if (character.attribute['gender'] && character.attribute['gender'].toLowerCase() == 'female') { %>
+                            <% } else if (character.attribute['gender'] && character.attribute['gender'].toLowerCase() == 'female') { %>
                                 <img class="avatar border-gray" src="/img/default_female_avatar.png" alt="Default profile for <%= character.name %>"/>
                             <% } else { %>
                                 <img class="avatar border-gray" src="/img/default_male_avatar.png" alt="Default profile for <%= character.name %>"/>
