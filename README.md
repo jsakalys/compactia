@@ -3,15 +3,15 @@
 Compactia was designed to be a project management tool for table-top role players and story gamers. My goal is to one day make it a one-stop shop for campaign management. Compactia was built using Node.js and Express with PostgreSQL.
 
 ### Screenshots
-<img src="static/img/screenshots/screenshot_landing.png" width="296" alt="Landing">
-<img src="static/img/screenshots/screenshot_modal.png" width="296" alt="Register Modal">
-<img src="static/img/screenshots/screenshot_create.png" width="296" alt="Home">
-<img src="static/img/screenshots/screenshot_campaign_wizard.png" width="296" alt="Campaign Wizard">
-<img src="static/img/screenshots/screenshot_character_edit.png" width="296" alt="Character Info">
-<img src="static/img/screenshots/screenshot_campaign_edit.png" width="296" alt="Campaign Info">
-<img src="static/img/screenshots/screenshot_campaign_dash.png" width="296" alt="Campaign Dash">
-<img src="static/img/screenshots/screenshot_campaign_characters.png" width="296" alt="Campaign Characters">
-<img src="static/img/screenshots/screenshot_account.png" width="296" alt="User Account">
+<img src="static/img/screenshots/screenshot_landing.png" width="280" alt="Landing">
+<img src="static/img/screenshots/screenshot_modal.png" width="280" alt="Register Modal">
+<img src="static/img/screenshots/screenshot_create.png" width="280" alt="Home">
+<img src="static/img/screenshots/screenshot_campaign_wizard.png" width="280" alt="Campaign Wizard">
+<img src="static/img/screenshots/screenshot_character_edit.png" width="280" alt="Character Info">
+<img src="static/img/screenshots/screenshot_campaign_edit.png" width="280" alt="Campaign Info">
+<img src="static/img/screenshots/screenshot_campaign_dash.png" width="280" alt="Campaign Dash">
+<img src="static/img/screenshots/screenshot_campaign_characters.png" width="280" alt="Campaign Characters">
+<img src="static/img/screenshots/screenshot_account.png" width="280" alt="User Account">
 
 ### Features
 * Supports local sign up/log in functionality with encrypted passwords
